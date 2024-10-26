@@ -1,0 +1,21 @@
+<view class="container">
+  <form bindsubmit="onSubmit">
+    <view class="form-item">
+      <text>头像：</text>
+      <image class="avatar" src="{{avatarUrl}}" bindtap="chooseAvatar" />
+    </view>
+    <view class="form-item">
+      <text>昵称：</text>
+      <input type="text" placeholder="请输入昵称" value="{{nickname}}" bindinput="onInputChange" data-field="nickname" />
+    </view>
+    <view class="form-item">
+      <text>姓名：</text>
+      <input type="text" placeholder="请输入姓名" value="{{name}}" bindinput="onInputChange" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text>身份证号码：</text>
+      <input type="text" placeholder="请输入身份证号码" value="{{idCard}}" bindinput="onInputChange" data-field="idCard" />
+    </view>
+    <button formType="submit" class="submit-button">保存</button>
+  </form>
+</view>

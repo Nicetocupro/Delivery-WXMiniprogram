@@ -1,0 +1,19 @@
+<view class="container">
+  <button bindtap="addAddress" class="add-button">新增收货地址</button>
+  
+  <view class="address-list">
+    <block wx:for="{{addresses}}" wx:key="index">
+      <view class="address-item">
+        <view class="address-details">
+          <text>{{item.name}}，{{item.phone}}</text>
+          <text>{{item.school}} - {{item.campus}} - {{item.building}} - {{item.detail}}</text>
+        </view>
+        <view class="address-actions">
+          <button bindtap="setDefault" data-index="{{index}}" class="default-button">{{item.isDefault ? '默认地址' : '设为默认'}}</button>
+          <button bindtap="editAddress" data-index="{{index}}" class="edit-button">编辑</button>
+          <button bindtap="deleteAddress" data-index="{{index}}" class="delete-button">删除</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

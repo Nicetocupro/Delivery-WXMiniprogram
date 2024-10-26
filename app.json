@@ -3,7 +3,10 @@
     "pages": [
         "pages/index/index",
         "pages/logs/logs",
-        "pages/profile/index"
+        "pages/profile/index",
+        "pages/modifyInformation/modifyInformation",
+        "pages/manageAddress/manageAddress",
+        "pages/addAddress/addAddress"
     ],
     "window": {
         "backgroundTextStyle": "light",
