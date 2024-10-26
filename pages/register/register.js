@@ -179,10 +179,31 @@ Page({
 
     /**微信快捷登录，暂未实现，等后端 */
     getPhoneNumber: function (e) {
-        // 转到目前的个人信息页面
-        wx.switchTab({
-            url: '/pages/profile/profile'
-        });
+        console.log("getPhoneNumber")
+        console.log(e.detail.errMsg)
+        console.log(e.detail.iv)
+        console.log(e.detail.encryptedData)
+        if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+            wx.showModal({
+                title: '提示',
+                showCancel: false,
+                content: '未授权',
+                success: function (res) {}
+            })
+        } else {
+            wx.showModal({
+                title: '提示',
+                showCancel: false,
+                content: '同意授权',
+                success: function (res) {}
+            })
+
+            // 转到目前的个人信息页面
+            wx.switchTab({
+                url: '/pages/profile/profile'
+            });
+        }
+
     },
 
     /**
