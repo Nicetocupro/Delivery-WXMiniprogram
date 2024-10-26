@@ -1,0 +1,292 @@
+/* 最大的父元素 */
+.v1 {
+    position: relative;
+    min-height: 100vh;
+    /* 确保背景高度覆盖整个视口 */
+    width: 100%;
+    overflow: hidden;
+    /* 防止出现滚动条 */
+}
+
+/* 背景图片 */
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* 确保图片在最底层 */
+    object-fit: cover;
+    /* 确保图片按比例覆盖整个区域 */
+}
+
+/* 白色区域 */
+.v1 .v2 {
+    margin: 300rpx auto 0;
+    width: 545rpx;
+    background: #FFFFFF;
+    border-radius: 50rpx;
+    padding: 50rpx 35rpx;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+    /* 使用 rgba 颜色值来设置背景透明度为 0.9 */
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+    /* 添加阴影以提高视觉层次感 */
+}
+
+/* 登录文本 */
+.v1 .v2 .dltext {
+    font-size: 60rpx;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 50rpx;
+}
+
+/* 输入框容器 */
+.v1 .v2 .phoneCs,
+.v1 .v2 .codeCs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    border-bottom: 2rpx solid #ccc;
+    margin-bottom: 30rpx;
+}
+
+/* 图标样式 */
+.v1 .v2 .phoneCs .ph,
+.v1 .v2 .codeCs .codeIcon {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+/* 输入框样式 */
+.v1 .v2 .phoneCs input,
+.v1 .v2 .codeCs input {
+    flex: 1;
+    font-size: 28rpx;
+    margin-left: 20rpx;
+    border: none;
+    outline: none;
+}
+
+/* 获取验证码按钮 */
+.v1 .v2 .codeCs .getCodeBtn {
+    width: 160rpx;
+    height: 50rpx;
+    font-size: 24rpx;
+    border-radius: 25rpx;
+    background-color: #2CC2C3;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 50rpx;
+    /* 将 line-height 设置为与按钮高度相同，确保文字垂直居中 */
+    padding: 0;
+    /* 去除多余的 padding */
+    border: none;
+    display: flex;
+    /* 使用 flex 布局来控制内容的对齐 */
+    align-items: center;
+    /* 垂直方向居中对齐 */
+    justify-content: center;
+    /* 水平方向居中对齐 */
+}
+
+.v1 .v2 .codeCs .getCodeBtn.disabled {
+    background-color: #ccc;
+    /* 倒计时期间的背景色 */
+    color: #999;
+}
+
+/* 登录按钮容器view */
+.v1 .v2 .denglu {
+    width: 350rpx;
+    height: 80rpx;
+    /* 修改为更高的高度，确保按钮整体更大 */
+    position: relative;
+    margin-top: 20rpx;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.v1 .v2 .denglu .btn-dl {
+    width: 100%;
+    height: 80rpx;
+    font-size: 30rpx;
+    border-radius: 40rpx;
+    background-color: rgba(44, 194, 195, 0.7);
+    /* 使用 rgba 设置背景颜色和透明度 */
+    color: #FFFFFF;
+    border: none;
+    opacity: 0.9;
+    /* 进一步设置整体的透明度 */
+}
+
+/* 用户协议 */
+/* 用户协议容器 */
+.v1 .v2 .xieyi {
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    width: 500rpx;
+    display: flex;
+    align-items: center;
+    /* 确保复选框和文字在垂直方向上对齐 */
+}
+
+/* 复选框 */
+.v1 .v2 .xieyi .isXY {
+    transform: scale(0.8);
+    margin-right: 15rpx;
+    /* 增加右侧间距，使复选框和文字有适当的间距 */
+}
+
+/* 用户协议文本 */
+.v1 .v2 .xieyi .text-xy {
+    color: #333333;
+    /* 设置稍深的颜色，保证文字清晰 */
+    font-size: 22rpx;
+    text-decoration: underline;
+    /* 增加下划线以表明“使用协议”是可点击的 */
+}
+
+
+/* 分割线和提示文本 */
+.v3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50rpx;
+}
+
+.v3 .line {
+    width: 120rpx;
+    height: 2rpx;
+    background-color: #FFFFFF;
+}
+
+.v3 .lText {
+    color: #FFFFFF;
+    font-size: 24rpx;
+    margin: 0 10rpx;
+}
+
+.close-btn {
+    margin-top: 30rpx;
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    background-color: #2CC2C3;
+    color: #FFFFFF;
+    border-radius: 30rpx;
+    text-align: center;
+}
+
+
+/* 社交登录图标 */
+.qwwIcon {
+    display: flex;
+    justify-content: center;
+    margin-top: 30rpx;
+}
+
+.qwwIcon image {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0 20rpx;
+}
+
+/* ---弹窗css--- */
+.modal-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    overflow: hidden;
+    color: #fff;
+}
+
+.modal-dialog {
+    width: 72%;
+    position: absolute;
+    top: 30%;
+    left: 14%;
+    background: #fff;
+    border-radius: 12rpx;
+    z-index: 100;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.modal-content .show {
+    width: 450rpx;
+    height: 323rpx;
+    display: block;
+    margin: 0 auto;
+    margin-top: -118rpx;
+    z-index: 10000;
+}
+
+.iconWx {
+    width: 52rpx;
+    height: 41rpx;
+    padding-right: 20rpx;
+}
+
+.iconPhone {
+    width: 56rpx;
+    height: 56rpx;
+    padding-right: 15rpx;
+}
+
+.modal-content view:nth-of-type(2) {
+    font-size: 38rpx;
+    color: #333333;
+    line-height: 1;
+}
+
+.modal-content view:nth-of-type(3) {
+    font-size: 26rpx;
+    color: #9c9c9c;
+    margin: 18rpx 0 29rpx;
+    line-height: 1;
+}
+
+.modal-content button:nth-of-type(1) {
+    width: 80%;
+    height: 80rpx;
+    border-radius: 60rpx;
+    margin: 0 auto 80rpx;
+    font-size: 30rpx;
+    color: #fff;
+    background: #31cc32;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.modal-content button:nth-of-type(1)::after {
+    border: none;
+}
+
+.modal-content .wxLogin {
+    font-size: 26rpx;
+    color: #424242;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 38rpx 0 80rpx;
+}
+
+button::after {
+    border: none;
+}
