@@ -1,0 +1,58 @@
+<view class="v1">
+    <image class="bg-image" src="/asserts/images/register/bg.jpg" mode="aspectFill"></image>
+    <!-- 白色容器 -->
+    <view class="v2">
+        <view class="dltext">校园外卖登录</view>
+
+        <!-- 手机号输入 -->
+        <view class="phoneCs">
+            <image src="/asserts/images/register/phone.png" class="ph"></image>
+            <input type="number" placeholder="请输入手机号" maxlength="12" bindinput="phoneNumberInput" />
+        </view>
+
+        <!-- 验证码输入 -->
+        <view class="codeCs">
+            <image src="/asserts/images/register/code.png" class="codeIcon"></image>
+            <input type="number" placeholder="请输入验证码" bindinput="CodeInput" />
+            <button class="getCodeBtn" bindtap="getCodeBtn" disabled="{{BtnisDisabled}}">{{btnText}}</button>
+        </view>
+
+        <!-- 登录按钮 -->
+        <view class="denglu">
+            <button class="btn-dl" type="primary" bind:tap="LogIn">登录</button>
+        </view>
+
+        <!-- 用户协议 -->
+        <view class="xieyi">
+            <checkbox class="isXY" checked="{{isChecked}}" bindtap="CheckBoxChange"></checkbox>
+            <view class="text-xy" bindtap="showAgreement">同意小程序的《使用协议》</view>
+        </view>
+    </view>
+
+    <!-- 分割线和提示文本 -->
+    <view class="v3">
+        <view class="line"></view>
+        <view class="lText">您还可以使用以下方式登录</view>
+        <view class="line"></view>
+    </view>
+
+    <!-- 社交登录图标 -->
+    <view class="qwwIcon">
+        <image src="/asserts/images/register/weixin.png" bind:tap="WeiXinLogIn"></image>
+    </view>
+
+    <!--登录弹窗-->
+    <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bind:tap="BindModalMask"></view>
+    <view class="modal-dialog" wx:if="{{showModal}}">
+        <view class="modal-content">
+            <view>
+                <image src='' class='show'></image>
+            </view>
+            <view>绑定手机号</view>
+            <view>请先绑定手机号在进行此操作</view>
+            <button open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">
+                <image src='/asserts/images/register/register.png' class='iconWx'></image>微信用户一键绑定
+            </button>
+        </view>
+    </view>
+</view>
