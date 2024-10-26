@@ -14,6 +14,34 @@ Page({
       }
   },
 
+  /**修改个人信息 */
+  modifyInformation: function() {
+    console.log('修改信息_按钮被点击');
+    wx.navigateTo({
+      url: '/pages/modifyInformation/modifyInformation',
+      success: function(res) {
+        console.log('修改信息_跳转成功');
+      },
+      fail: function(err) {
+        console.error('修改信息_跳转失败', err);
+      }
+    });
+  },
+
+  /**管理收货地址 */
+  manageAddress: function(){
+    console.log('收货地址_按钮被点击');
+    wx.navigateTo({
+      url: '/pages/manageAddress/manageAddress',
+      success: function(res) {
+        console.log('收货地址_跳转成功');
+      },
+      fail: function(err) {
+        console.error('收货地址_跳转失败', err);
+      }
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -4,7 +4,10 @@
         "pages/register/register",
         "pages/index/index",
         "pages/logs/logs",
-        "pages/profile/profile"
+        "pages/profile/index",
+        "pages/modifyInformation/modifyInformation",
+        "pages/manageAddress/manageAddress",
+        "pages/addAddress/addAddress"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -1,0 +1,44 @@
+.container {  
+    padding: 20rpx; /* 修改为rpx */  
+  }  
+    
+  .add-button {  
+    background-color: #1aad19;  
+    color: white;  
+    padding: 10rpx; /* 修改为rpx */  
+    border: none;  
+    border-radius: 4rpx; /* 圆角也使用rpx */  
+    margin-bottom: 20rpx; /* 修改为rpx */  
+  }  
+    
+  .address-list {  
+    margin-top: 10rpx; /* 修改为rpx */  
+    overflow-y: auto; /* 如果地址列表很长，允许垂直滚动 */  
+    max-height: calc(100vh - 120rpx); /* 确保列表不会超出屏幕高度，这里假设顶部和底部有足够的空间 */  
+  }  
+    
+  .address-item {  
+    border: 1rpx solid #ccc; /* 修改为rpx */  
+    border-radius: 4rpx; /* 圆角也使用rpx */  
+    padding: 15rpx; /* 修改为rpx */  
+    margin-bottom: 10rpx; /* 修改为rpx */  
+    box-sizing: border-box; /* 确保padding和border不会增加元素的总宽度 */  
+  }  
+    
+  .address-details {  
+    margin-bottom: 10rpx; /* 修改为rpx */  
+  }  
+    
+  .address-actions {  
+    display: flex;  
+    justify-content: space-between;  
+    flex-wrap: wrap; /* 如果按钮很多，允许它们换行 */  
+  }  
+    
+  .default-button, .edit-button, .delete-button {  
+    background-color: #f5f5f5;  
+    border: none;  
+    padding: 5rpx; /* 修改为rpx */  
+    border-radius: 4rpx; /* 圆角也使用rpx */  
+    margin-left: 5rpx; /* 修改为rpx */  
+  }
