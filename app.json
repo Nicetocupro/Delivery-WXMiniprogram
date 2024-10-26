@@ -1,6 +1,7 @@
 {
-    "entryPagePath": "pages/index/index",
+    "entryPagePath": "pages/register/register",
     "pages": [
+        "pages/register/register",
         "pages/index/index",
         "pages/logs/logs",
         "pages/profile/index",
@@ -32,7 +33,7 @@
                 "text": "日志"
             },
             {
-                "pagePath": "pages/profile/index",
+                "pagePath": "pages/profile/profile",
                 "text": "个人中心"
             }
         ]
