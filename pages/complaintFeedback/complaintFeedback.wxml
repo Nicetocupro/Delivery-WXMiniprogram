@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="tab">
+    <button bindtap="showFeedback">提交反馈</button>
+    <button bindtap="showRecords">反馈记录</button>
+  </view>
+
+  <view wx:if="{{showSubmitFeedback}}">
+    <textarea 
+      placeholder="有什么想法都可以说出来哦~" 
+      maxlength="100" 
+      bindinput="onInputFeedback" 
+      class="feedback-input"
+      value="{{feedback}}"
+    ></textarea>
+    <input 
+      type="text" 
+      placeholder="请输入手机号码" 
+      bindinput="onInputPhone" 
+      class="phone-input"
+      value="{{phone}}"
+    />
+    <view class="hint">温馨提示：投诉反馈将在24小时内回复处理，请耐心等待，敬请谅解！</view>
+    <button bindtap="submitFeedback">完成</button>
+  </view>
+
+  <view wx:if="{{showRecords}}">
+    <view class="records-list">
+      <block wx:for="{{records}}" wx:key="index">
+        <view class="record-item">
+          <text>{{item.date}}: {{item.content}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
