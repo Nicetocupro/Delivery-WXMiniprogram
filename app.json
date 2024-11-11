@@ -3,7 +3,7 @@
     "pages": [
         "pages/register/register",
         "pages/index/index",
-        "pages/logs/logs",
+        "pages/order/order",
         "pages/profile/profile",
         "pages/modifyInformation/modifyInformation",
         "pages/manageAddress/manageAddress",
@@ -31,8 +31,10 @@
                 "selectedIconPath": "/asserts/images/index_selected.png"                
             },
             {
-                "pagePath": "pages/logs/logs",
-                "text": "日志"
+                "pagePath": "pages/order/order",
+                "text": "订单",
+                "iconPath": "/asserts/images/order.png",
+                "selectedIconPath": "/asserts/images/order_selected.png"
             },
             {
                 "pagePath": "pages/profile/profile",
