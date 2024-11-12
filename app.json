@@ -8,7 +8,9 @@
         "pages/profile/profile",
         "pages/modifyInformation/modifyInformation",
         "pages/manageAddress/manageAddress",
-        "pages/addAddress/addAddress"
+        "pages/addAddress/addAddress",
+        "pages/complaintFeedback/complaintFeedback",
+        "pages/cooperation/cooperation"
     ],
     "window": {
         "backgroundTextStyle": "light",
