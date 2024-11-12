@@ -4,6 +4,7 @@
         "pages/register/register",
         "pages/index/index",
         "pages/order/order",
+        "pages/order_info/order_info",
         "pages/profile/profile",
         "pages/modifyInformation/modifyInformation",
         "pages/manageAddress/manageAddress",
