@@ -60,12 +60,12 @@
                 <image src="/asserts/images/profile/address.png" />
                 <text>收货地址</text>
             </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
+            <view class="section-item" bind:tap="complainFeedback">
+                <image src="/asserts/images/profile/complaint.png" />
                 <text>投诉反馈</text>
             </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
+            <view class="section-item" bind:tap="cooperation">
+                <image src="/asserts/images/profile/cooperation.png" />
                 <text>商务合作</text>
             </view>
             <view class="section-item">
