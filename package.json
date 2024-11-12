@@ -1,0 +1,15 @@
+{
+  "name": "delivery-wxminiprogram",
+  "version": "1.0.0",
+  "description": "本仓库是微信小程序客户端的上游仓库，马恒超作为Maintainer。",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.11.7"
+  }
+}

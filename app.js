@@ -3,10 +3,11 @@ const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia0
 
 App({
     onLaunch() {
-       
+
     },
     globalData: {
         uid: null,
+        baseUrl: "https://localhost/api/v1/",
         userInfo: {
             phoneNumber: null,
             avatarUrl: defaultAvatarUrl,
