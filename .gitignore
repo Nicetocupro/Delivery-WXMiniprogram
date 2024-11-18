@@ -12,7 +12,10 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
-
+# 微信小程序的npm
+miniprogram_npm/
+# 本地package
+package-lock.json
 # 项目
 project.private.config.json
 project.config.json

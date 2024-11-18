@@ -3,11 +3,14 @@
     "pages": [
         "pages/register/register",
         "pages/index/index",
-        "pages/logs/logs",
+        "pages/order/order",
+        "pages/order_info/order_info",
         "pages/profile/profile",
         "pages/modifyInformation/modifyInformation",
         "pages/manageAddress/manageAddress",
-        "pages/addAddress/addAddress"
+        "pages/addAddress/addAddress",
+        "pages/complaintFeedback/complaintFeedback",
+        "pages/cooperation/cooperation"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -26,11 +29,15 @@
         "list": [
             {
                 "pagePath": "pages/index/index",
-                "text": "首页"
+                "text": "外卖",
+                "iconPath": "/asserts/images/index.png",
+                "selectedIconPath": "/asserts/images/index_selected.png"                
             },
             {
-                "pagePath": "pages/logs/logs",
-                "text": "日志"
+                "pagePath": "pages/order/order",
+                "text": "订单",
+                "iconPath": "/asserts/images/order.png",
+                "selectedIconPath": "/asserts/images/order_selected.png"
             },
             {
                 "pagePath": "pages/profile/profile",
@@ -51,7 +58,6 @@
         "independent": true
     },
     "subpackages": [],
-    "style": "v2",
     "componentFramework": "glass-easel",
     "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents"
