@@ -3,6 +3,7 @@
     "pages": [
         "pages/register/register",
         "pages/index/index",
+        "pages/takeaway/takeaway",
         "pages/order/order",
         "pages/order_info/order_info",
         "pages/profile/profile",
@@ -20,32 +21,6 @@
         "homeButton": true,
         "visualEffectInBackground": "hidden",
         "restartStrategy": "homePageAndLatestPage"
-    },
-    "tabBar": {
-        "color": "#ffffff",
-        "selectedColor": "#ffff00",
-        "backgroundColor": "#2CC2C3",
-        "borderStyle": "white",
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "text": "外卖",
-                "iconPath": "/asserts/images/index.png",
-                "selectedIconPath": "/asserts/images/index_selected.png"                
-            },
-            {
-                "pagePath": "pages/order/order",
-                "text": "订单",
-                "iconPath": "/asserts/images/order.png",
-                "selectedIconPath": "/asserts/images/order_selected.png"
-            },
-            {
-                "pagePath": "pages/profile/profile",
-                "text": "个人中心",
-                "iconPath": "/asserts/images/persen_center.png",
-                "selectedIconPath": "/asserts/images/persen_center_selected.png"
-            }
-        ]
     },
     "networkTimeout": {
         "request": 10000,
