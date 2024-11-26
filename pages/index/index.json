@@ -1,4 +1,8 @@
 {
-  "usingComponents": {
-  }
+    "component":true,
+    "usingComponents": {
+        "takeaway" : "/pages/takeaway/takeaway",
+        "order" : "/pages/order/order",
+        "profile" : "/pages/profile/profile"
+    }
 }

@@ -1,81 +1,54 @@
-<view class="page">
-    <!-- 顶部导航 -->
-    <view class="navbar">
-        <!-- 顶部地点选择 -->
-        <view class="location">
-            <image src="/asserts/images/index/location.png" class="location-icon" />
-            <text>港陆广场</text>
-        </view>
+<view>
+  <!-- 根据 user 动态渲染不同的导航栏 -->
+  <takeaway wx:if="{{pageCur == 'takeaway' && user == 0}}"></takeaway>
+  <order wx:if="{{pageCur == 'order' && user == 0}}"></order>
+  <profile wx:if="{{pageCur == 'profile' && user == 0}}"></profile>
 
-        <!-- 搜索框 -->
-        <view class="search-bar">
-            <input type="text" placeholder="搜索你想要的商家或美食" />
-            <button class="search-button" style="width: 60px;">搜索</button>
+  <!-- 骑手导航栏 -->
+  <view wx:if="{{user == 1}}">
+    <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
+      <view class="cell" bindtap="navChange" data-cur="delivery">
+        <view class="image">
+          <image src="/asserts/images/index/delivery{{pageCur == 'delivery' ? '_selected' : ''}}.png"></image>
         </view>
+        <view class="{{pageCur == 'delivery' ? 'text-selected' : 'text-default'}}">待接单</view>
+      </view>
+      <view class="cell" bindtap="navChange" data-cur="inDelivery">
+        <view class="image">
+          <image src="/asserts/images/index/inDelivery{{pageCur == 'inDelivery' ? '_selected' : ''}}.png"></image>
+        </view>
+        <view class="{{pageCur == 'inDelivery' ? 'text-selected' : 'text-default'}}">配送中</view>
+      </view>
+      <view class="cell" bindtap="navChange" data-cur="history">
+        <view class="image">
+          <image src="/asserts/images/index/history{{pageCur == 'history' ? '_selected' : ''}}.png"></image>
+        </view>
+        <view class="{{pageCur == 'history' ? 'text-selected' : 'text-default'}}">历史记录</view>
+      </view>
     </view>
+  </view>
 
-    <!-- 分类菜单 -->
-    <view class="category-menu">
-        <view class="category-item" bindtap="filterShops" data-category="营养早餐">
-            <image class="category-image" src="/asserts/images/index/breakfast.png" />
-            <text>营养早餐</text>
+  <!-- 顾客导航栏 -->
+  <view wx:if="{{user == 0}}">
+    <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
+      <view class="cell" bindtap="navChange" data-cur="takeaway">
+        <view class="image">
+          <image src="/asserts/images/index/takeaway{{pageCur == 'takeaway' ? '_selected' : ''}}.png"></image>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="经典美食">
-            <image class="category-image" src="/asserts/images/index/classic.png" />
-            <text>经典美食</text>
+        <view class="{{pageCur == 'takeaway' ? 'text-selected' : 'text-default'}}">外卖</view>
+      </view>
+      <view class="cell" bindtap="navChange" data-cur="order">
+        <view class="image">
+          <image src="/asserts/images/index/order{{pageCur == 'order' ? '_selected' : ''}}.png"></image>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="烧烤串">
-            <image class="category-image" src="/asserts/images/index/bbq.png" />
-            <text>烧烤串</text>
+        <view class="{{pageCur == 'order' ? 'text-selected' : 'text-default'}}">订单</view>
+      </view>
+      <view class="cell" bindtap="navChange" data-cur="profile">
+        <view class="image">
+          <image src="/asserts/images/index/persen_center{{pageCur == 'profile' ? '_selected' : ''}}.png"></image>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="甜点饮品">
-            <image class="category-image" src="/asserts/images/index/dessert.png" />
-            <text>甜点饮品</text>
-        </view>
+        <view class="{{pageCur == 'profile' ? 'text-selected' : 'text-default'}}">个人信息</view>
+      </view>
     </view>
-
-    <!-- 筛选栏 -->
-    <view class="filter-bar">
-        <text class="filter-item" bindtap="sortShops" data-sort="综合排序">综合排序</text>
-        <text class="filter-item" bindtap="sortShops" data-sort="销量最高">销量最高</text>
-        <text class="filter-item" bindtap="sortShops" data-sort="口碑最好">口碑最好</text>
-    </view>
-
-    <!-- 商家列表 -->
-    <view class="shop-list">
-        <block wx:for="{{filteredShops}}" wx:key="name">
-            <!-- 单个商家框 -->
-            <view class="shop-container">
-                <!-- 商家信息部分 -->
-                <view class="shop-item">
-                    <image class="shop-logo" src="{{item.logo}}" />
-                    <view class="shop-info">
-                        <text class="shop-name">{{item.name}}</text>
-                        <text class="shop-description">{{item.description}}</text>
-                        <view class="shop-stats">
-                            <text>月售 {{item.monthlySales}}</text>
-                            <text>配送费 ￥{{item.deliveryFee}}</text>
-                        </view>
-                        <view class="shop-tags">
-                            <text wx:for="{{item.tags}}" wx:key="tag" class="shop-tag">{{tag}}</text>
-                        </view>
-                    </view>
-                    <text class="shop-rating">{{item.rating}} 分</text>
-                </view>
-
-                <!-- 商品列表部分 -->
-                <view class="product-list">
-                    <block wx:for="{{item.products}}" wx:key="productName">
-                        <view class="product-item">
-                            <image class="product-image" src="{{item.image}}" />
-                            <view class="product-info">
-                                <text class="product-name">{{item.name}}</text>
-                                <text class="product-price">￥{{item.price}}</text>
-                            </view>
-                        </view>
-                    </block>
-                </view>
-            </view>
-        </block>
-    </view>
+  </view>
 </view>

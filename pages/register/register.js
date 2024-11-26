@@ -199,9 +199,9 @@ Page({
             })
 
             // 转到目前的个人信息页面
-            wx.switchTab({
-                url: '/pages/profile/profile'
-            });
+            wx.navigateTo({
+              url:  '/pages/index/index',
+            })
         }
 
     },

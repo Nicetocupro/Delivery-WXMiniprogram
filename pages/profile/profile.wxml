@@ -1,77 +1,76 @@
 <view class="container">
-    <view class="header" bindtap="modifyInformation">
-        <image class="profile-pic" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
-        <view class="set-profile">游客</view>
-    </view>
+  <!-- 用户头像和昵称 -->
+  <view class="header" bindtap="modifyInformation">
+    <image class="profile-pic" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+    <view class="set-profile">{{userInfo.nickName || '游客'}}</view>
+  </view>
 
-    <!-- 我的订单部分 -->
-    <view class="section-container">
-        <view class="section-title">我的订单</view>
-        <view class="section-content">
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>待付款</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>待使用</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>待评价</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>售后/退款</text>
-            </view>
-        </view>
+  <!-- 我的订单部分 -->
+  <view class="section-container">
+    <view class="section-title">我的订单</view>
+    <view class="section-content">
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>待付款</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>待使用</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>待评价</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>售后/退款</text>
+      </view>
     </view>
+  </view>
 
-    <!-- 工具与服务部分 -->
-    <view class="section-container">
-        <view class="section-title">工具与服务</view>
-        <view class="section-content">
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>跑腿认证</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>我的卡券</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>抽奖记录</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>店铺收藏</text>
-            </view>
-        </view>
+  <!-- 工具与服务部分 -->
+  <view class="section-container">
+    <view class="section-title">工具与服务</view>
+    <view class="section-content">
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>跑腿认证</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>我的卡券</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>抽奖记录</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>店铺收藏</text>
+      </view>
     </view>
+  </view>
 
-    <!-- <button bindtap="modifyInformation" class="change-profile" style="width: 100rpx;margin-left: 350rpx;" hover-class="change-profile-hover">修改信息</button> -->
-
-    <!-- 账户与设置部分 -->
-    <view class="section-container">
-        <view class="section-title">账户与设置</view>
-        <view class="section-content">
-            <view class="section-item" bind:tap="manageAddress">
-                <image src="/asserts/images/profile/address.png" />
-                <text>收货地址</text>
-            </view>
-            <view class="section-item" bind:tap="complainFeedback">
-                <image src="/asserts/images/profile/complaint.png" />
-                <text>投诉反馈</text>
-            </view>
-            <view class="section-item" bind:tap="cooperation">
-                <image src="/asserts/images/profile/cooperation.png" />
-                <text>商务合作</text>
-            </view>
-            <view class="section-item">
-                <image src="{{userInfo.avatarUrl}}" />
-                <text>设置</text>
-            </view>
-        </view>
+  <!-- 账户与设置部分 -->
+  <view class="section-container">
+    <view class="section-title">账户与设置</view>
+    <view class="section-content">
+      <view class="section-item" bindtap="manageAddress">
+        <image src="/asserts/images/profile/address.png" />
+        <text>收货地址</text>
+      </view>
+      <view class="section-item" bindtap="complainFeedback">
+        <image src="/asserts/images/profile/complaint.png" />
+        <text>投诉反馈</text>
+      </view>
+      <view class="section-item" bindtap="cooperation">
+        <image src="/asserts/images/profile/cooperation.png" />
+        <text>商务合作</text>
+      </view>
+      <view class="section-item">
+        <image src="{{userInfo.avatarUrl}}" />
+        <text>设置</text>
+      </view>
     </view>
+  </view>
 </view>

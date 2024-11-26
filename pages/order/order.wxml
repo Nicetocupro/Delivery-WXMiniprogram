@@ -5,7 +5,7 @@
       <view 
         class="status_tab" 
         data-status="{{item.status}}" 
-        bindtap="filterOrders"
+        bindtap="filterOrdersByStatus"
         style="background-color: {{activeStatus === item.status ? '#7bbfea' : '#fff'}}; color: {{activeStatus === item.status ? '#fff' : '#7bbfea'}};">
         {{item.label}}
       </view>
