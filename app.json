@@ -11,7 +11,8 @@
         "pages/manageAddress/manageAddress",
         "pages/addAddress/addAddress",
         "pages/complaintFeedback/complaintFeedback",
-        "pages/cooperation/cooperation"
+        "pages/cooperation/cooperation",
+        "pages/map/map"
     ],
     "window": {
         "backgroundTextStyle": "light",
