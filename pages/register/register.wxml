@@ -19,7 +19,7 @@
 
         <!-- 登录按钮 -->
         <view class="denglu">
-            <button class="btn-dl" type="primary" bind:tap="LogIn">登录</button>
+            <button class="btn-dl" type="primary" bind:tap="logIn">登录</button>
         </view>
 
         <!-- 用户协议 -->
@@ -38,7 +38,7 @@
 
     <!-- 社交登录图标 -->
     <view class="qwwIcon">
-        <image src="/asserts/images/register/weixin.png" bind:tap="WeiXinLogIn"></image>
+        <image src="/asserts/images/register/weixin.png" bind:tap="weixin"></image>
     </view>
 
     <!--登录弹窗-->
@@ -50,7 +50,7 @@
             </view>
             <view>绑定手机号</view>
             <view>请先绑定手机号在进行此操作</view>
-            <button open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">
+            <button bind:tap="wxLogin">
                 <image src='/asserts/images/register/register.png' class='iconWx'></image>微信用户一键绑定
             </button>
         </view>
