@@ -61,4 +61,5 @@
             </view>
         </block>
     </view>
+    <navigator url="/pages/map/map" >开始导航</navigator>
 </view>
