@@ -54,19 +54,19 @@ Component({
         });
       },
   
-      // 商务合作跳转
-      cooperation: function () {
-        console.log('商务合作');
-        wx.navigateTo({
-          url: '/pages/cooperation/cooperation',
-          success: function (res) {
-            console.log('商务合作_跳转成功');
-          },
-          fail: function (err) {
-            console.error('商务合作_跳转失败', err);
-          }
-        });
-      },
+    //   // 商务合作跳转
+    //   cooperation: function () {
+    //     console.log('商务合作');
+    //     wx.navigateTo({
+    //       url: '/pages/cooperation/cooperation',
+    //       success: function (res) {
+    //         console.log('商务合作_跳转成功');
+    //       },
+    //       fail: function (err) {
+    //         console.error('商务合作_跳转失败', err);
+    //       }
+    //     });
+    //   },
     }
   });
   

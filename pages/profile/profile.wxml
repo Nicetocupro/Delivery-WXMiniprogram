@@ -63,10 +63,10 @@
         <image src="/asserts/images/profile/complaint.png" />
         <text>投诉反馈</text>
       </view>
-      <view class="section-item" bindtap="cooperation">
+      <navigator class="section-item" url="/pages/cooperation/cooperation">
         <image src="/asserts/images/profile/cooperation.png" />
         <text>商务合作</text>
-      </view>
+      </navigator>
       <view class="section-item">
         <image src="{{userInfo.avatarUrl}}" />
         <text>设置</text>
