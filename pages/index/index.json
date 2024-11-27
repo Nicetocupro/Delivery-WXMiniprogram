@@ -3,6 +3,9 @@
     "usingComponents": {
         "takeaway" : "/pages/takeaway/takeaway",
         "order" : "/pages/order/order",
-        "profile" : "/pages/profile/profile"
+        "profile" : "/pages/profile/profile",
+        "rider_map" : "/pages/rider_map/rider_map",
+        "rider_order" : "/pages/rider_order/rider_order",
+        "rider_profile" : "/pages/rider_profile/rider_profile"
     }
 }

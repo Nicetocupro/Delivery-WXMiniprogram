@@ -1,13 +1,17 @@
 Page({
     data: {
-      pageCur: 'takeaway',  // 默认显示外卖页面
+      pageCur: '',  // 默认显示外卖页面
+      user: 0
     },
   
     onLoad() {
       const app = getApp();
       const user = app.globalData.user;  // 获取全局用户信息
+      const pageCur = app.globalData.user ? "rider_map" : "takeaway"
+      console.log(user, pageCur)
       this.setData({
-        user: user
+        user: user,
+        pageCur: pageCur
       });
     },
   
@@ -24,7 +28,7 @@ Page({
       const app = getApp();
       app.globalData.user = this.data.user === 0 ? 1 : 0;  // 切换用户身份
       this.setData({
-        user: app.globalData.user
+        user: app.globalData.user,
       });
     }
   });

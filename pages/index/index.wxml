@@ -1,54 +1,58 @@
 <view>
-  <!-- 根据 user 动态渲染不同的导航栏 -->
-  <takeaway wx:if="{{pageCur == 'takeaway' && user == 0}}"></takeaway>
-  <order wx:if="{{pageCur == 'order' && user == 0}}"></order>
-  <profile wx:if="{{pageCur == 'profile' && user == 0}}"></profile>
+    <!-- 根据 user 动态渲染不同的导航栏 -->
+    <takeaway wx:if="{{pageCur == 'takeaway' && user == 0}}"></takeaway>
+    <order wx:if="{{pageCur == 'order' && user == 0}}"></order>
+    <profile wx:if="{{pageCur == 'profile' && user == 0}}"></profile>
 
-  <!-- 骑手导航栏 -->
-  <view wx:if="{{user == 1}}">
-    <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
-      <view class="cell" bindtap="navChange" data-cur="delivery">
-        <view class="image">
-          <image src="/asserts/images/index/delivery{{pageCur == 'delivery' ? '_selected' : ''}}.png"></image>
-        </view>
-        <view class="{{pageCur == 'delivery' ? 'text-selected' : 'text-default'}}">待接单</view>
-      </view>
-      <view class="cell" bindtap="navChange" data-cur="inDelivery">
-        <view class="image">
-          <image src="/asserts/images/index/inDelivery{{pageCur == 'inDelivery' ? '_selected' : ''}}.png"></image>
-        </view>
-        <view class="{{pageCur == 'inDelivery' ? 'text-selected' : 'text-default'}}">配送中</view>
-      </view>
-      <view class="cell" bindtap="navChange" data-cur="history">
-        <view class="image">
-          <image src="/asserts/images/index/history{{pageCur == 'history' ? '_selected' : ''}}.png"></image>
-        </view>
-        <view class="{{pageCur == 'history' ? 'text-selected' : 'text-default'}}">历史记录</view>
-      </view>
-    </view>
-  </view>
+    <rider_map wx:if="{{pageCur == 'rider_map' && user == 1}}"></rider_map>
+    <rider_order wx:if="{{pageCur == 'rider_order' && user == 1}}"></rider_order>
+    <rider_profile wx:if="{{pageCur == 'rider_profile' && user == 1}}"></rider_profile>
 
-  <!-- 顾客导航栏 -->
-  <view wx:if="{{user == 0}}">
-    <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
-      <view class="cell" bindtap="navChange" data-cur="takeaway">
-        <view class="image">
-          <image src="/asserts/images/index/takeaway{{pageCur == 'takeaway' ? '_selected' : ''}}.png"></image>
+    <!-- 骑手导航栏 -->
+    <view wx:if="{{user == 1}}">
+        <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
+            <view class="cell" bindtap="navChange" data-cur="rider_map">
+                <view class="image">
+                    <image src="/asserts/images/index/rider_map{{pageCur == 'rider_map' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'rider_map' ? 'text-selected' : 'text-default'}}">地图</view>
+            </view>
+            <view class="cell" bindtap="navChange" data-cur="rider_order">
+                <view class="image">
+                    <image src="/asserts/images/index/rider_order{{pageCur == 'rider_order' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'rider_order' ? 'text-selected' : 'text-default'}}">抢单</view>
+            </view>
+            <view class="cell" bindtap="navChange" data-cur="rider_profile">
+                <view class="image">
+                    <image src="/asserts/images/index/rider_profile{{pageCur == 'rider_profile' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'rider_profile' ? 'text-selected' : 'text-default'}}">个人信息</view>
+            </view>
         </view>
-        <view class="{{pageCur == 'takeaway' ? 'text-selected' : 'text-default'}}">外卖</view>
-      </view>
-      <view class="cell" bindtap="navChange" data-cur="order">
-        <view class="image">
-          <image src="/asserts/images/index/order{{pageCur == 'order' ? '_selected' : ''}}.png"></image>
-        </view>
-        <view class="{{pageCur == 'order' ? 'text-selected' : 'text-default'}}">订单</view>
-      </view>
-      <view class="cell" bindtap="navChange" data-cur="profile">
-        <view class="image">
-          <image src="/asserts/images/index/persen_center{{pageCur == 'profile' ? '_selected' : ''}}.png"></image>
-        </view>
-        <view class="{{pageCur == 'profile' ? 'text-selected' : 'text-default'}}">个人信息</view>
-      </view>
     </view>
-  </view>
+
+    <!-- 顾客导航栏 -->
+    <view wx:if="{{user == 0}}">
+        <view class="fu-bar shadow foot" style="background-color: #2CC2C3; border-top: 1rpx solid white;">
+            <view class="cell" bindtap="navChange" data-cur="takeaway">
+                <view class="image">
+                    <image src="/asserts/images/index/takeaway{{pageCur == 'takeaway' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'takeaway' ? 'text-selected' : 'text-default'}}">外卖</view>
+            </view>
+            <view class="cell" bindtap="navChange" data-cur="order">
+                <view class="image">
+                    <image src="/asserts/images/index/order{{pageCur == 'order' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'order' ? 'text-selected' : 'text-default'}}">订单</view>
+            </view>
+            <view class="cell" bindtap="navChange" data-cur="profile">
+                <view class="image">
+                    <image src="/asserts/images/index/persen_center{{pageCur == 'profile' ? '_selected' : ''}}.png"></image>
+                </view>
+                <view class="{{pageCur == 'profile' ? 'text-selected' : 'text-default'}}">个人信息</view>
+            </view>
+        </view>
+    </view>
 </view>

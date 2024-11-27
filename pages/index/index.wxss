@@ -1,6 +1,6 @@
 .fu-bar {
     display: flex;
-    min-height: 100rpx;
+    min-height: 120rpx;
     justify-content: space-between;
     align-items: center;
   }
@@ -39,6 +39,7 @@
     text-align: center;
     font-size: 22rpx;
     color: #ffffff;
+    margin-bottom: 4px;
   }
   
   /* 选中文字样式 */
@@ -46,5 +47,6 @@
     text-align: center;
     font-size: 22rpx;
     color: #ffff00;
+    margin-bottom: 4px;
   }
   
