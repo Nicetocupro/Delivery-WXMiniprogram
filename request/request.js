@@ -15,11 +15,9 @@ const request = function (url, options) {
             url: app.globalData.baseUrl + url,
             method: options.method,
             data: options.method == "GET" ? options.data : JSON.stringify(options.data),
-            /* 目前没法用header
             header:{
-                'Authorization':'Bearer '+app.globalData.token
-            },
-            */
+                'Content-Type' : 'application/json'
+            },     
             success: (res) => {
                 if (res.data.code == 500) {
                     Toast(res.data.msg);

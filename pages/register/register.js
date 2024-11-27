@@ -1,3 +1,6 @@
+// 引入统一管理的接口js
+const api = require("../../request/api")
+
 var app = getApp();
 Page({
     /**
@@ -178,32 +181,48 @@ Page({
     },
 
     /**微信快捷登录，暂未实现，等后端 */
-    getPhoneNumber: function (e) {
-        console.log("getPhoneNumber")
-        console.log(e.detail.errMsg)
-        console.log(e.detail.iv)
-        console.log(e.detail.encryptedData)
-        if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-            wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: '未授权',
-                success: function (res) {}
-            })
-        } else {
-            wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: '同意授权',
-                success: function (res) {}
-            })
+    // 微信快捷登录
+    getPhoneNumber(e) {
+        wx.login({
+            success: (res) => {
+                if (res.code) {
+                    this.loginWithCode(res.code);
+                } else {
+                    console.error('登录失败！' + res.errMsg);
+                    wx.showToast({
+                        title: '登录失败',
+                        icon: 'none',
+                    });
+                }
+            },
+        });
+    },
 
-            // 转到目前的个人信息页面
-            wx.navigateTo({
-              url:  '/pages/index/index',
+    loginWithCode(code) {
+        const data = {
+            code : code
+        };
+        api.login(data)
+            .then(res => {
+                console.log('登录成功', res);
+                // 处理登录成功后的逻辑
+                wx.navigateTo({
+                    url: '/pages/index/index',
+                    success: function (res) {
+                      console.log('修改信息_跳转成功');
+                    },
+                    fail: function (err) {
+                      console.error('修改信息_跳转失败', err);
+                    }
+                  });
             })
-        }
-
+            .catch(err => {
+                console.error('登录失败', err);
+                wx.showToast({
+                    title: '登录失败，请重试',
+                    icon: 'none',
+                });
+            });
     },
 
     /**
