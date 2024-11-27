@@ -15,7 +15,8 @@
         "pages/map/map",
         "pages/rider_map/rider_map",
         "pages/rider_order/rider_order",
-        "pages/rider_profile/rider_profile"
+        "pages/rider_profile/rider_profile",
+        "pages/shop/shop"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -39,6 +39,18 @@ Component({
     },
 
     methods: {
+      navigator: function () {
+        console.log('导航');
+        wx.navigateTo({
+          url: '/pages/map/map',
+          success: function (res) {
+            console.log('导航_跳转成功');
+          },
+          fail: function (err) {
+            console.error('导航_跳转失败', err);
+          }
+        });
+      },
         filterShops: function (event) {
             const category = event.currentTarget.dataset.category;
             const filtered = this.data.shopList.filter(shop => shop.category === category);

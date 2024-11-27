@@ -1,5 +1,6 @@
 <view class="page">
-    <!-- 分类菜单 -->
+    <image class="navigator-icon" src="/asserts/images/takeaway/navigator.png" bindtap="navigator"></image>
+    <button class="navigator-button" size="mini" bindtap="navigator"> 开始导航 </button>
     <view class="category-menu">
         <!-- 每个分类对应的英文文件名 -->
         <view class="category-item" bindtap="filterShops" data-category="营养早餐">
@@ -61,5 +62,5 @@
             </view>
         </block>
     </view>
-    <navigator url="/pages/map/map" >开始导航</navigator>
+    <navigator url="/pages/shop/shop" >商家页面test</navigator>
 </view>
