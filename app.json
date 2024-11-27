@@ -11,7 +11,11 @@
         "pages/manageAddress/manageAddress",
         "pages/addAddress/addAddress",
         "pages/complaintFeedback/complaintFeedback",
-        "pages/cooperation/cooperation"
+        "pages/cooperation/cooperation",
+        "pages/map/map",
+        "pages/rider_map/rider_map",
+        "pages/rider_order/rider_order",
+        "pages/rider_profile/rider_profile"
     ],
     "window": {
         "backgroundTextStyle": "light",
