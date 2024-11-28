@@ -242,7 +242,8 @@ Page({
         };
         return api.login(data)
            .then(res => {
-                console.log('登录成功', res);
+               console.log('登录成功');
+                wx.setStorageSync('session_id', res.data);
                 // 处理登录成功后的逻辑
                 wx.navigateTo({
                     url: '/pages/index/index',
