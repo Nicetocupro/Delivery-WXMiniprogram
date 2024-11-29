@@ -200,3 +200,13 @@
     margin-top: 2px;
     text-align: center;
 }
+
+/* 搜索框容器样式，使其紧贴顶部 */
+.search-box-container {
+  display: flex;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
