@@ -19,3 +19,6 @@ package-lock.json
 # 项目
 project.private.config.json
 project.config.json
+
+# 历史记录
+.history
