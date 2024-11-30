@@ -1,43 +1,45 @@
 {
-    "entryPagePath": "pages/register/register",
-    "pages": [
-        "pages/register/register",
-        "pages/index/index",
-        "pages/takeaway/takeaway",
-        "pages/order/order",
-        "pages/order_info/order_info",
-        "pages/profile/profile",
-        "pages/modifyInformation/modifyInformation",
-        "pages/manageAddress/manageAddress",
-        "pages/addAddress/addAddress",
-        "pages/complaintFeedback/complaintFeedback",
-        "pages/cooperation/cooperation",
-        "pages/rider_map/rider_map",
-        "pages/rider_order/rider_order",
-        "pages/rider_profile/rider_profile",
-        "pages/shop/shop"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#2CC2C3",
-        "navigationBarTextStyle": "white",
-        "navigationBarTitleText": "校园外卖",
-        "homeButton": true,
-        "visualEffectInBackground": "hidden",
-        "restartStrategy": "homePageAndLatestPage"
-    },
-    "networkTimeout": {
-        "request": 10000,
-        "uploadFile": 10000,
-        "downloadFile": 10000,
-        "connectSocket": 10000
-    },
-    "debug": true,
-    "functionalPages": {
-        "independent": true
-    },
-    "subpackages": [],
-    "componentFramework": "glass-easel",
-    "sitemapLocation": "sitemap.json",
-    "lazyCodeLoading": "requiredComponents"
+  "entryPagePath": "pages/register/register",
+  "pages": [
+    "pages/register/register",
+    "pages/index/index",
+    "pages/takeaway/takeaway",
+    "pages/order/order",
+    "pages/order_info/order_info",
+    "pages/profile/profile",
+    "pages/modifyInformation/modifyInformation",
+    "pages/manageAddress/manageAddress",
+    "pages/addAddress/addAddress",
+    "pages/complaintFeedback/complaintFeedback",
+    "pages/cooperation/cooperation",
+    "pages/rider_map/rider_map",
+    "pages/rider_order/rider_order",
+    "pages/rider_profile/rider_profile",
+    "pages/shop/shop",
+    "pages/map/map",
+    "pages/shoppingCart/shoppingCart"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2CC2C3",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "校园外卖",
+    "homeButton": true,
+    "visualEffectInBackground": "hidden",
+    "restartStrategy": "homePageAndLatestPage"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000,
+    "connectSocket": 10000
+  },
+  "debug": true,
+  "functionalPages": {
+    "independent": true
+  },
+  "subpackages": [],
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
 }
