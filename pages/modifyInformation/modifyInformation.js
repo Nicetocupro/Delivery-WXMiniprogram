@@ -1,71 +1,110 @@
 const api = require("../../request/api");
+var app = getApp();
+
+const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0';
 
 Page({
     data: {
-        phoneNumber:'',
-        avatarUrl: '', // 头像 URL
-        nickname: '',
-      // name: '',
-      // idCard: '',
-      // address: ''
+        phoneNumber: '',
+        avatarUrl: defaultAvatarUrl, // 头像 URL
+        nickName: '',
+        isLoading: false, // 加载状态
+        errorMessage: '' // 错误信息
     },
-  
-    onLoad: function () {
-      // 模拟获取用户信息
-      const userInfo = wx.getStorageSync('userInfo') || {};
-      this.setData({
-        avatarUrl: userInfo.avatarUrl || '',
-        nickname: userInfo.nickname || '',
-        name: userInfo.name || '',
-        idCard: userInfo.idCard || '',
-        address: userInfo.address || ''
-      });
-    },
-  
-    chooseAvatar: function () {
-      const that = this;
-      wx.chooseImage({
-        count: 1,
-        sizeType: ['original', 'compressed'],
-        sourceType: ['album', 'camera'],
-        success(res) {
-          // 假设上传头像成功后，获取到新头像的 URL
-          const avatarUrl = res.tempFilePaths[0];
-          that.setData({ avatarUrl });
-          // 这里可以添加上传头像到服务器的逻辑
-        }
-      });
-    },
-  
-    onInputChange: function (e) {
-      const field = e.currentTarget.dataset.field;
-      this.setData({
-        [field]: e.detail.value
-      });
-    },
-  
-    onSubmit: function (e) {
-      // 保存用户信息
-      // const { avatarUrl, nickname, name, idCard } = this.data;
-      // const userInfo = { avatarUrl, nickname, name, idCard };
-  
-      // 这里可以添加保存到服务器的逻辑
-      // wx.setStorageSync('userInfo', userInfo);
-      /*wx.showToast({
-        title: '保存成功',
-        icon: 'success',
-        duration: 2000
-      });
-*/
-      let data = {
-          phone_number : '+8615665299259',
-          profile_image_url : 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0',
-          nickname : 'Nice2cu'
-      }
 
-      api.ChangeProfile(data);
-      
-      wx.navigateBack(); // 返回上一个页面
+    onLoad: function () {
+        let phoneNumber = app.globalData.userInfo.phoneNumber;
+        if (phoneNumber.startsWith('+86')) {
+            phoneNumber = phoneNumber.substring(3); // 去掉 +86
+        }
+        this.setData({
+            avatarUrl: app.globalData.userInfo.avatarUrl || defaultAvatarUrl,
+            nickName: app.globalData.userInfo.nickName,
+            phoneNumber: phoneNumber
+        });
+    },
+
+    onChooseAvatar(e) {
+        const {
+            avatarUrl
+        } = e.detail;
+        this.setData({
+            avatarUrl,
+        });
+    },
+
+    onInputChange: function (e) {
+        const field = e.currentTarget.dataset.field;
+        if (field === 'phoneNumber') {
+            let value = e.detail.value;
+            if (value.startsWith('+86')) {
+                value = value.substring(3); // 去掉 +86
+            }
+            this.setData({
+                [field]: value
+            });
+        } else {
+            this.setData({
+                [field]: e.detail.value
+            });
+        }
+    },
+
+    onSubmit: function (e) {
+        if (!this.validateForm()) {
+            return;
+        }
+
+        this.setData({
+            isLoading: true,
+            errorMessage: ''
+        });
+
+        let data = {
+            phone_number: `+86${this.data.phoneNumber}`,
+            profile_image_url: this.data.avatarUrl,
+            nickname: this.data.nickName
+        };
+
+        api.ChangeProfile(data)
+            .then(() => {
+                // 更新 app.globalData 中的数据
+                app.globalData.userInfo.avatarUrl = this.data.avatarUrl;
+                app.globalData.userInfo.nickName = this.data.nickName;
+                app.globalData.userInfo.phoneNumber = `+86${this.data.phoneNumber}`;
+                wx.navigateBack(); // 返回上一个页面
+            })
+            .catch((error) => {
+                this.setData({
+                    errorMessage: error.message
+                });
+            })
+            .finally(() => {
+                this.setData({
+                    isLoading: false
+                });
+            });
+    },
+
+    validateForm: function () {
+        if (!this.data.nickName) {
+            this.setData({
+                errorMessage: '请输入昵称'
+            });
+            return false;
+        }
+        if (!this.data.phoneNumber) {
+            this.setData({
+                errorMessage: '请输入手机号'
+            });
+            return false;
+        }
+        if (!/^1[3-9]\d{9}$/.test(this.data.phoneNumber)) {
+            this.setData({
+                errorMessage: '请输入有效的手机号'
+            });
+            return false;
+        }
+        return true;
     }
-  });
-  
+});
