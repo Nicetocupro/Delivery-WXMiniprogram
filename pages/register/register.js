@@ -243,12 +243,12 @@ Page({
         return api.login(data)
             .then(res => {
                 console.log('登录成功');
-                console.log(res.data.data);
-                if (res.data.info != undefined) {
-                    app.globalData.userInfo.nickname = res.data.info.nickname;
-                    app.globalData.userInfo.phoneNumber = res.data.info.phone_number;
-                    if (res.data.info.profile_image_url != "") {
-                        app.globalData.userInfo.avatarUrl = res.data.info.profile_image_url;
+                console.log(res.data.data.info);
+                if (res.data.data.info != undefined) {
+                    app.globalData.userInfo.nickName = res.data.data.info.nickname;
+                    app.globalData.userInfo.phoneNumber = res.data.data.info.phone_number;
+                    if (res.data.data.info.profile_image_url != "") {
+                        app.globalData.userInfo.avatarUrl = res.data.data.info.profile_image_url;
                     }
                 }
                 console.log(app.globalData);
