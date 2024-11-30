@@ -44,7 +44,7 @@ Page({
             const isSuccess = this.validatePhoneNumber(phoneNumber); // 先简单验证手机号格式（实际需完善验证逻辑）
             if (isSuccess) {
                 // 实际应用中这里调用接口发送验证码
-                resolve(); 
+                resolve();
             } else {
                 reject(new Error('手机号格式不正确'));
             }
@@ -64,7 +64,7 @@ Page({
 
         const phoneNumber = this.data.userInfo.phoneNumber;
         this.sendVerificationCode(phoneNumber)
-           .then(() => {
+            .then(() => {
                 // 在这里将手机号进行存储，防止手机号变更。
                 app.globalData.userInfo.phoneNumber = phoneNumber;
 
@@ -77,7 +77,7 @@ Page({
                 // 开始倒计时
                 this.startCountdown();
             })
-           .catch((err) => {
+            .catch((err) => {
                 wx.showToast({
                     title: err.message,
                     icon: 'error',
@@ -241,9 +241,18 @@ Page({
             code: code
         };
         return api.login(data)
-           .then(res => {
-               console.log('登录成功');
-                wx.setStorageSync('session_id', res.data);
+            .then(res => {
+                console.log('登录成功');
+                console.log(res.data.data);
+                if (res.data.info != undefined) {
+                    app.globalData.userInfo.nickname = res.data.info.nickname;
+                    app.globalData.userInfo.phoneNumber = res.data.info.phone_number;
+                    if (res.data.info.profile_image_url != "") {
+                        app.globalData.userInfo.avatarUrl = res.data.info.profile_image_url;
+                    }
+                }
+                console.log(app.globalData);
+                wx.setStorageSync('session_id', res.data.data.session_id);
                 // 处理登录成功后的逻辑
                 wx.navigateTo({
                     url: '/pages/index/index',
@@ -255,7 +264,7 @@ Page({
                     }
                 });
             })
-           .catch(err => {
+            .catch(err => {
                 console.error('登录失败', err);
                 wx.showToast({
                     title: '登录失败，请重试',

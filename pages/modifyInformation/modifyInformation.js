@@ -1,10 +1,13 @@
+const api = require("../../request/api");
+
 Page({
     data: {
-      avatarUrl: '', // 头像 URL
-      nickname: '',
-      name: '',
-      idCard: '',
-      address: ''
+        phoneNumber:'',
+        avatarUrl: '', // 头像 URL
+        nickname: '',
+      // name: '',
+      // idCard: '',
+      // address: ''
     },
   
     onLoad: function () {
@@ -43,17 +46,25 @@ Page({
   
     onSubmit: function (e) {
       // 保存用户信息
-      const { avatarUrl, nickname, name, idCard } = this.data;
-      const userInfo = { avatarUrl, nickname, name, idCard };
+      // const { avatarUrl, nickname, name, idCard } = this.data;
+      // const userInfo = { avatarUrl, nickname, name, idCard };
   
       // 这里可以添加保存到服务器的逻辑
-      wx.setStorageSync('userInfo', userInfo);
-      wx.showToast({
+      // wx.setStorageSync('userInfo', userInfo);
+      /*wx.showToast({
         title: '保存成功',
         icon: 'success',
         duration: 2000
       });
+*/
+      let data = {
+          phone_number : '+8615665299259',
+          profile_image_url : 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0',
+          nickname : 'Nice2cu'
+      }
 
+      api.ChangeProfile(data);
+      
       wx.navigateBack(); // 返回上一个页面
     }
   });
