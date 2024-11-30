@@ -1,2 +1,30 @@
-<!--pages/rider_order/rider_order.wxml-->
-<text>pages/rider_order/rider_order.wxml</text>
+<view class="container" >
+  <!-- TabBar -->
+  <view class="tab-bar" hidden="{{ tabBarHidden }}">
+    <view class="tab" bindtap="onTabChange" data-index="0" style="background-color: {{activeTab == 0 ? '#2CC2C3' : '#fff'}}">新任务</view>
+    <view class="tab" bindtap="onTabChange" data-index="1" style="background-color: {{activeTab == 1 ? '#2CC2C3' : '#fff'}}">待取货</view>
+    <view class="tab" bindtap="onTabChange" data-index="2" style="background-color: {{activeTab == 2 ? '#2CC2C3' : '#fff'}}">待送达</view>
+    <view class="tab" bindtap="onTabChange" data-index="3" style="background-color: {{activeTab == 3 ? '#2CC2C3' : '#fff'}}">已完成</view>
+  </view>
+
+  <!-- 任务列表 -->
+  <scroll-view scroll-y="true" class="task-list" lower-threshold="50" bindscrolltolower="onReachBottom" enable-flex>
+    <block wx:for="{{taskList}}" wx:key="id">
+      <view class="task-card">
+        <view class="task-info">
+          <view class="task-address">取餐地址：{{item.pickupAddress}}</view>
+          <view class="task-address">送达地址：{{item.deliveryAddress}}</view>
+          <view class="task-amount">订单金额：¥{{item.orderAmount}}</view>
+          <view class="task-distance">总计路程：{{item.totalDistance}} km</view>
+          <view class="task-timelimit">时间限制：{{item.timeLimit}} 分钟</view>
+        </view>
+        <button class="grab-button" bindtap="onGrabTask" data-id="{{item.id}}">抢单</button>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 下拉刷新 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+</view>
