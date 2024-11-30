@@ -3,7 +3,7 @@ Page({
       pageCur: '',  // 默认显示外卖页面
       user: 0
     },
-  
+
     onLoad() {
       const app = getApp();
       const user = app.globalData.user;  // 获取全局用户信息
