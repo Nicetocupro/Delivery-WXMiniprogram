@@ -174,4 +174,13 @@
   .checkout-button {
     background-color: #ff5722;
   }
+
+  .tab-bar {
+    top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+    font-size: 16px;
+  }
   

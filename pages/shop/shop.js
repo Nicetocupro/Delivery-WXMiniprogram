@@ -33,6 +33,8 @@ Page({
       // 当前选择的商品类目ID
       selectedCategoryId: 1,
       selectedCategoryProducts: [], // 当前选择类目的商品数据
+
+      selectedPage: 'products'
     },
   
     onLoad() {
@@ -78,6 +80,14 @@ Page({
       wx.navigateTo({
         url: '/pages/checkout/checkout'
       });
-    }
+    },
+
+     // 选择页面
+    selectPage(e) {
+        const page = e.currentTarget.dataset.page;
+        this.setData({
+        selectedPage: page
+        });
+    },
   });
   

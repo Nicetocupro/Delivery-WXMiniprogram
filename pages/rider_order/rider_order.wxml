@@ -1,7 +1,7 @@
 <view class="container" >
   <!-- TabBar -->
   <view class="tab-bar" hidden="{{ tabBarHidden }}">
-    <view class="tab" bindtap="onTabChange" data-index="0" style="background-color: {{activeTab == 0 ? '#2CC2C3' : '#fff'}}">新任务</view>
+    <view class="tab" bindtap="onTabChange" data-index="0" style="background-color: {{activeTab == 0 ? '#2CC2C3' : '#fff'}}">新任务</view> 
     <view class="tab" bindtap="onTabChange" data-index="1" style="background-color: {{activeTab == 1 ? '#2CC2C3' : '#fff'}}">待取货</view>
     <view class="tab" bindtap="onTabChange" data-index="2" style="background-color: {{activeTab == 2 ? '#2CC2C3' : '#fff'}}">待送达</view>
     <view class="tab" bindtap="onTabChange" data-index="3" style="background-color: {{activeTab == 3 ? '#2CC2C3' : '#fff'}}">已完成</view>

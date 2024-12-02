@@ -17,8 +17,14 @@
     </block>
   </swiper>
 
+  <!-- 选择显示商品页或评价页的bar -->
+  <view class="tab-bar">
+    <view class="selection-item {{selectedPage === 'products' ? 'active' : ''}}" bindtap="selectPage" data-page="products">商店</view>
+    <view class="selection-item {{selectedPage === 'reviews' ? 'active' : ''}}" bindtap="selectPage" data-page="reviews">评价</view>
+  </view>
+
   <!-- 商品类目与商品列表 -->
-  <view class="menu-container">
+  <view class="menu-container" wx:if="{{selectedPage === 'products'}}">
     <!-- 商品类目 -->
     <scroll-view class="categories" scroll-y>
       <block wx:for="{{categories}}" wx:key="id">
@@ -32,7 +38,7 @@
     </scroll-view>
 
     <!-- 商品列表 -->
-    <scroll-view class="product-list" scroll-y>
+    <scroll-view class="product-list" wx:if="{{selectedPage === 'products'}} "scroll-y>
       <block wx:for="{{selectedCategoryProducts}}" wx:key="id">
         <view class="product-card">
           <image class="product-image" src="{{item.image}}" alt="product image" />
@@ -42,6 +48,20 @@
               <text class="product-price">¥{{item.price}}</text>
               <button class="spec-button" bindtap="selectSpec" data-id="{{item.id}}">选规格</button>
             </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="review-container" wx:if="{{selectedPage === 'reviews'}}">
+    <scroll-view class="review-list" scroll-y>
+      <block wx:for="{{reviews}}" wx:key="id">
+        <view class="review-card">
+          <view class="review-details">
+            <text class="review-user">{{item.user}}</text>
+            <text class="review-content">{{item.content}}</text>
           </view>
         </view>
       </block>
