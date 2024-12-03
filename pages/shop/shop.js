@@ -18,6 +18,27 @@ Page({
         { id: 4, name: '甜点' }
       ],
       
+      reviews: [
+        {
+          id: 1,
+          user: '用户1',
+          content: '这家店的食物非常美味，服务也很好！',
+          image: '../../asserts/images/comments/dz.png'
+        },
+        {
+          id: 2,
+          user: '用户2',
+          content: '环境很好，适合家庭聚餐。',
+          image: '../../asserts/images/comments/tea.png'
+        },
+        {
+          id: 3,
+          user: '用户3',
+          content: '价格实惠，性价比高。',
+          image: '../../asserts/images/comments/chad.png'
+        }
+      ],
+
       // 商品数据
       products: [
         { id: 1, categoryId: 1, name: '麻辣小龙虾', price: 88.00, image: '../../asserts/images/shopTest/4.jpg' },
@@ -89,5 +110,22 @@ Page({
         selectedPage: page
         });
     },
+
+    previewImage: function(e) {
+        const current = e.currentTarget.dataset.src;
+        const urls = [current];
+        console.log(current);
+        console.log(urls);
+        wx.previewImage({
+          current: current, // 当前显示图片的链接
+          urls: urls // 需要预览的图片链接列表
+        });
+      },
+
+      writeReview: function() {
+        wx.navigateTo({
+            url: '/pages/writeReview/writeReview'
+        });
+    }
   });
   

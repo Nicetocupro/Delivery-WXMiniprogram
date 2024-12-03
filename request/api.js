@@ -11,5 +11,9 @@ module.exports = {
     // 商务合作
     cooperation(data) {
         return request.post('customer/merchant-application', data)
+    },
+    // 获取评价列表
+    fetchcomment(restaurant_id){
+        return request.get(`/customer/comment/restaurant/${restaurant_id}`)
     }
 }

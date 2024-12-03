@@ -1,0 +1,8 @@
+<view class="write-review-container">
+    <textarea class="review-textarea" placeholder="请输入您的评论" bindinput="onTextInput" />
+    <button class="upload-button" bindtap="chooseImage">上传照片</button>
+    <view class="image-container" wx:if="{{images.length > 0}}">
+        <image class="review-image" src="{{item.thumb}}" mode="aspectFit" wx:for="{{images}}" wx:key="index" />
+    </view>
+    <button class="submit-button" bindtap="submitReview">提交评论</button>
+</view>

@@ -54,23 +54,27 @@
     </scroll-view>
   </view>
 
-  <!-- 评价列表 -->
-  <view class="review-container" wx:if="{{selectedPage === 'reviews'}}">
-    <scroll-view class="review-list" scroll-y>
-      <block wx:for="{{reviews}}" wx:key="id">
-        <view class="review-card">
-          <view class="review-details">
-            <text class="review-user">{{item.user}}</text>
-            <text class="review-content">{{item.content}}</text>
-          </view>
-        </view>
-      </block>
-    </scroll-view>
-  </view>
+    <!-- 评价列表 -->
+    <view class="review-container" wx:if="{{selectedPage === 'reviews'}}">
+        <scroll-view class="review-list" scroll-y>
+            <block wx:for="{{reviews}}" wx:key="id">
+                <view class="review-card">
+                    <view class="review-details">
+                    <text class="review-user">{{item.user}}</text>
+                    <text class="review-content">{{item.content}}</text>
+                    <image class="review-image" src="{{item.image}}" mode="aspectFit" bindtap="previewImage" data-src="{{item.image}}"></image>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
 
   <!-- 底部按钮 -->
-  <view class="bottom-buttons-container">
+  <view class="bottom-buttons-container" wx:if="{{selectedPage === 'products'}}">
     <button class="cart-button" bindtap="goToCart">购物车</button>
     <button class="checkout-button" bindtap="goToCheckout">去结算</button>
   </view>
 </view>
+    <view class="bottom-buttons-container" wx:if="{{selectedPage === 'reviews'}}">
+        <button class="review-button" bindtap="writeReview">写评论</button>
+    </view>
