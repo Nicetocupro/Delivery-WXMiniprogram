@@ -35,7 +35,7 @@ const request = function (url, options) {
                         Toast("登陆超时");
                         //删除缓存  重新登录 获取会话
                         wx.removeStorageSync('sessionid');
-                        
+
                         wx.navigateTo({
                             url: '/pages/register/register',
                             success: function (res) {
@@ -75,5 +75,22 @@ module.exports = {
             method: "POST",
             data
         })
-    }
+    },
+
+    // 封装delete方法
+    delete(url, data) {
+        return request(url, {
+            method: "DELETE", // 修正拼写
+            data
+        });
+    },
+
+    // 封装put方法
+    put(url, data) {
+        return request(url, {
+            method: "PUT", // 修正拼写
+            data
+        });
+    },
+
 }

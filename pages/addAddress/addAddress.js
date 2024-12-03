@@ -1,102 +1,169 @@
+const api = require("../../request/api");
+
 Page({
     data: {
-      name: '',
-      phone: '',
-      selectedSchool: '同济大学',
-      selectedCampus: '四平校区',
-      selectedBuilding: '',
-      schools: ['同济大学', '其他'],
-      campuses: ['四平校区'],
-      buildings: [],
-      detail: '',
-      index: null // 用于编辑时存储索引
+        name: '',
+        phone: '',
+        detail: '',
+        index: null, // 用于编辑时存储索引
+        isLoading: false,
+        errorMessage: ''
     },
-  
+
     onLoad: function (options) {
-      if (options.index) {
-        const address = JSON.parse(options.address);
-        this.setData({
-          name: address.name,
-          phone: address.phone,
-          selectedSchool: address.school,
-          selectedCampus: address.campus,
-          selectedBuilding: address.building,
-          detail: address.detail,
-          index: options.index
-        });
-  
-        this.updateCampusAndBuilding(address.school, address.campus); // 更新校区和楼栋
-      }
+        console.log("options: ", options);
+        if (options.index) {
+            const address = JSON.parse(options.address);
+            this.setData({
+                name: address.name,
+                phone: address.phone_number.substring(3),
+                detail: address.address,
+                index: options.index
+            });
+        }
     },
-  
+
     onInputChange: function (e) {
-      const field = e.currentTarget.dataset.field;
-      this.setData({
-        [field]: e.detail.value
-      });
+        const field = e.currentTarget.dataset.field;
+        if (field === 'phone') {
+            let value = e.detail.value;
+            if (value.startsWith('+86')) {
+                value = value.substring(3); // 去掉 +86
+            }
+            this.setData({
+                [field]: value
+            });
+        } else {
+            this.setData({
+                [field]: e.detail.value
+            });
+        }
     },
-  
-    onSchoolChange: function (e) {
-      const school = this.data.schools[e.detail.value];
-      this.setData({ 
-        selectedSchool: school,
-        campuses: school === '同济大学' ? ['四平校区', '嘉定校区', '沪西校区', '彰武校区'] : ['其他'],
-        selectedCampus: school === '同济大学' ? '四平校区' : '其他',
-        buildings: [],
-        selectedBuilding: ''
-      });
-      
-      this.updateCampusAndBuilding(school, this.data.selectedCampus); // 更新校区和楼栋
-    },
-  
-    onCampusChange: function (e) {
-      const campus = this.data.campuses[e.detail.value];
-      this.setData({
-        selectedCampus: campus,
-        buildings: this.getBuildings(campus),
-        selectedBuilding: ''
-      });
-    },
-  
-    getBuildings: function (campus) {
-      if (campus === '四平校区') {
-        return ['西南一', '西南二', '西南三', '西南四', '西南五', '西南六', '西南七', '西南八', '西南九', '西南十', '西南十一', '西南十二', '西北一', '西北二', '西北三', '西北四', '西北五'];
-      } else if (campus === '嘉定校区') {
-        return Array.from({ length: 20 }, (_, i) => `友园${i + 1}号楼`).concat(Array.from({ length: 5 }, (_, i) => `朋园${i + 1}号楼`));
-      } else {
-        return []; // 其他情况没有楼栋
-      }
-    },
-  
-    onBuildingChange: function (e) {
-      const building = this.data.buildings[e.detail.value];
-      this.setData({
-        selectedBuilding: building
-      });
-    },
-  
+
     onSubmit: function (e) {
-      const { name, phone, selectedSchool, selectedCampus, selectedBuilding, detail, index } = this.data;
-      const address = { name, phone, school: selectedSchool, campus: selectedCampus, building: selectedBuilding, detail };
-  
-      let addresses = wx.getStorageSync('addresses') || [];
-      if (index !== null) {
-        addresses[index] = address; // 编辑
-      } else {
-        addresses.push(address); // 新增
-      }
-  
-      wx.setStorageSync('addresses', addresses);
-      wx.showToast({
-        title: '保存成功',
-        icon: 'success',
-        duration: 2000
-      });
-  
-    //   wx.navigateBack(); // 返回上一个页面（但是不会刷新页面，导致新增的地址没有显示）
-    wx.navigateTo({
-        url: '/pages/manageAddress/manageAddress' // 这样返回上一个页面的效率不高，还有改进空间
-      });
+        const {
+            name,
+            phone,
+            detail,
+            index
+        } = this.data;
+        const address = {
+            name,
+            phone,
+            detail
+        };
+
+        if (!this.validateForm(address)) {
+            return;
+        }
+
+        this.setData({
+            isLoading: true,
+            errorMessage: ''
+        });
+
+        const data = {
+            address: address.detail,
+            gender: 1,
+            name: address.name,
+            phone_number: `+86${address.phone}`
+        };
+
+        console.log(data)
+
+        if (index !== null) {
+            // 编辑地址
+            api.changeAddress(data, index).then(res => {
+                if (res.data.ecode === 200) {
+                    wx.showToast({
+                        title: '修改成功',
+                        icon: 'success',
+                        duration: 2000,
+                        success: function () {
+                            console.log('弹窗显示成功');
+                            wx.navigateBack(); // 返回上一个页面
+                        },
+                        fail: function () {
+                            console.log('弹窗显示失败');
+                        },
+                        complete: function(){
+                            console.log('弹窗显示完成');
+                        }
+                    })
+                } else {
+                    this.setData({
+                        errorMessage: '修改地址失败'
+                    });
+                }
+            }).catch(err => {
+                this.setData({
+                    errorMessage: err.message || '修改地址失败'
+                });
+            }).finally(() => {
+                this.setData({
+                    isLoading: false
+                });
+            });
+        } else {
+            // 新增地址
+            api.addAddress(data).then(res => {
+                // console.log("res.ecode: ", res.data.ecode);
+                if (res.data.ecode === 200) {
+                    console.log('新建地址，成功！');
+                    wx.showToast({
+                        title: '修改成功',
+                        icon: 'success',
+                        duration: 2000,
+                        success: function () {
+                            console.log('弹窗显示成功');
+                            wx.navigateBack(); // 返回上一个页面
+                        },
+                        fail: function () {
+                            console.log('弹窗显示失败');
+                        },
+                        complete: function(){
+                            console.log('弹窗显示完成');
+                        }
+                    });
+
+                } else {
+                    this.setData({
+                        errorMessage: '新增地址失败'
+                    });
+                }
+            }).catch(err => {
+                console.log('新建地址，失败！');
+                this.setData({
+                    errorMessage: err.message || '新增地址失败'
+                });
+            }).finally(() => {
+                console.log('新建地址，完成！');
+                this.setData({
+                    isLoading: false
+                });
+            });
+        }
+    },
+
+    validateForm: function (address) {
+        // 校验表单数据
+        if (!/^1[3-9]\d{9}$/.test(address.phone)) {
+            wx.showToast({
+                title: '请填写正确的电话号码',
+                icon: 'none',
+                duration: 2000
+            });
+            return false;
+        }
+
+        if (!address.name || !address.phone || !address.detail) {
+            wx.showToast({
+                title: '请填写完整地址信息',
+                icon: 'none',
+                duration: 2000
+            });
+            return false;
+        }
+        return true;
     }
-  });
-  
+});
