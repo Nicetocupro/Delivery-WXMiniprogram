@@ -6,8 +6,8 @@ App({
         
     },
     globalData: {
-        baseUrl: "https://localhost/api/v1/wx/",
-        user: 0,  // 默认是顾客，0表示顾客，1表示骑手ffvvc
+        baseUrl: "https://www.xiaoqingyanxuan.top/api/v1/wx/",
+        user: 0,  // 默认是顾客，0表示顾客，1表示骑手
         userInfo: {
             phoneNumber: null,
             avatarUrl: defaultAvatarUrl,
