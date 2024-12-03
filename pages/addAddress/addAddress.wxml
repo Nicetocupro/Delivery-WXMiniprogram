@@ -1,35 +1,17 @@
 <view class="container">
-  <form bindsubmit="onSubmit">
-    <view class="form-item">
-      <text>收货人：</text>
-      <input type="text" placeholder="请输入收货人姓名" value="{{name}}" bindinput="onInputChange" data-field="name" />
-    </view>
-    <view class="form-item">
-      <text>电话号码：</text>
-      <input type="text" placeholder="请输入电话号码" value="{{phone}}" bindinput="onInputChange" data-field="phone" />
-    </view>
-    <view class="form-item">
-      <text>学校：</text>
-      <picker mode="selector" range="{{schools}}" bindchange="onSchoolChange">
-        <view class="picker">{{selectedSchool}}</view>
-      </picker>
-    </view>
-    <view class="form-item">
-      <text>校区：</text>
-      <picker mode="selector" range="{{campuses}}" bindchange="onCampusChange">
-        <view class="picker">{{selectedCampus}}</view>
-      </picker>
-    </view>
-    <view class="form-item">
-      <text>楼栋：</text>
-      <picker mode="selector" range="{{buildings}}" bindchange="onBuildingChange">
-        <view class="picker">{{selectedBuilding}}</view>
-      </picker>
-    </view>
-    <view class="form-item">
-      <text>详细地址：</text>
-      <input type="text" placeholder="请输入详细地址" value="{{detail}}" bindinput="onInputChange" data-field="detail" />
-    </view>
-    <button formType="submit" class="submit-button">保存</button>
-  </form>
+    <form bindsubmit="onSubmit">
+        <view class="form-item">
+            <text>收货人：</text>
+            <input type="text" placeholder="请输入收货人姓名" value="{{name}}" bindinput="onInputChange" data-field="name" />
+        </view>
+        <view class="form-item">
+            <text>电话号码：</text>
+            <input type="text" placeholder="请输入电话号码" value="{{phone}}" bindinput="onInputChange" data-field="phone" />
+        </view>
+        <view class="form-item">
+            <text>详细地址：</text>
+            <input type="text" placeholder="请输入详细地址" value="{{detail}}" bindinput="onInputChange" data-field="detail" />
+        </view>
+        <button formType="submit" class="submit-button">保存</button>
+    </form>
 </view>

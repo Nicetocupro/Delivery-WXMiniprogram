@@ -1,29 +1,66 @@
+/* 页面容器 */
 .container {
     padding: 20rpx;
-  }
-  
-  .form-item {
-    margin-bottom: 20px;
-  }
-  
-  input {
-    width: 100%;
-    border: 1rpx solid #ccc;
-    border-radius: 4rpx;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* 表单项 */
+.form-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20rpx;
+    margin-bottom: 20rpx;
+    border-radius: 10rpx;
+    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 输入框标签 */
+.form-item text {
+    font-size: 28rpx;
+    color: #333;
+    width: 100px;
+}
+
+/* 输入框 */
+input {
+    flex: 1;
+    height: 50rpx;
+    font-size: 28rpx;
     padding: 10rpx;
-  }
-  
-  .picker {
     border: 1rpx solid #ccc;
-    border-radius: 4rpx;
-    padding: 10rpx;
-  }
-  
-  .submit-button {
-    background-color: #1aad19;
+    border-radius: 5rpx;
+    background-color: #f9f9f9;
+}
+
+/* 输入框聚焦时的样式 */
+input:focus {
+    border-color: #3498db;
+    background-color: #fff;
+}
+
+/* 提交按钮 */
+.submit-button {
+    margin-top: 30rpx;
+    padding: 15rpx 20rpx;
+    background-color: #27ae60;
     color: white;
-    padding: 10rpx;
+    font-size: 30rpx;
     border: none;
-    border-radius: 4rpx;
-  }
-  
+    border-radius: 5rpx;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* 提交按钮的悬浮效果 */
+.submit-button:hover {
+    background-color: #2ecc71;
+}
