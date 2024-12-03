@@ -28,7 +28,8 @@ Component({
     },
 
     data: {
-        filteredShops: []
+        filteredShops: [],
+        searchQuery : ''
     },
 
     lifetimes: {
@@ -51,33 +52,60 @@ Component({
           }
         });
       },
-        filterShops: function (event) {
-            const category = event.currentTarget.dataset.category;
-            const filtered = this.data.shopList.filter(shop => shop.category === category);
-            this.setData({
-                filteredShops: filtered
-            });
-            console.log(category);
-        },
+      filterShops: function (event) {
+          const category = event.currentTarget.dataset.category;
+          const filtered = this.data.shopList.filter(shop => shop.category === category);
+          this.setData({
+              filteredShops: filtered
+          });
+          console.log(category);
+      },
 
-        sortShops: function (event) {
-            const sortType = event.currentTarget.dataset.sort;
-            let sortedShops = this.data.filteredShops;
+      sortShops: function (event) {
+          const sortType = event.currentTarget.dataset.sort;
+          let sortedShops = this.data.filteredShops;
 
-            if (sortType === "综合排序") {
-                console.log("综合排序");
-                sortedShops = sortedShops.sort((a, b) => b.rating - a.rating);
-            } else if (sortType === "销量最高") {
-                console.log("销量最高");
-                sortedShops = sortedShops.sort((a, b) => b.monthlySales - a.monthlySales);
-            } else if (sortType === "口碑最好") {
-                console.log("口碑最好");
-                sortedShops = sortedShops.sort((a, b) => b.rating - a.rating);
-            }
+          if (sortType === "综合排序") {
+              console.log("综合排序");
+              sortedShops = sortedShops.sort((a, b) => b.rating - a.rating);
+          } else if (sortType === "销量最高") {
+              console.log("销量最高");
+              sortedShops = sortedShops.sort((a, b) => b.monthlySales - a.monthlySales);
+          } else if (sortType === "口碑最好") {
+              console.log("口碑最好");
+              sortedShops = sortedShops.sort((a, b) => b.rating - a.rating);
+          }
 
-            this.setData({
-                filteredShops: sortedShops
-            });
+          this.setData({
+              filteredShops: sortedShops
+          });
+      },
+
+      // 搜索框输入事件
+      onSearchInput: function(event) {
+        this.setData({
+          searchQuery: event.detail.value  // 更新搜索框的输入内容
+        });
+        //console.log(this.data.searchQuery);
+      },
+  
+      // 搜索框按下回车或确认
+      onSearchConfirm: function() {
+        const query = this.data.searchQuery;
+        this.searchRestaurant(query);
+      },
+
+      searchRestaurant:function(query){
+        if(query.length==0){
+          this.setData({filteredShops: this.data.shopList});
+          return;
         }
+        console.log("尝试搜索",query);
+        const filtered = this.data.shopList.filter(shop => shop.name.includes(this.data.searchQuery));
+        this.setData({
+            filteredShops: filtered
+        });
+        //console.log(filteredShops);
+      }
     }
 });

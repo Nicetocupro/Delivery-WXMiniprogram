@@ -17,7 +17,8 @@
         "pages/rider_profile/rider_profile",
         "pages/shop/shop",
         "pages/map/map",
-        "pages/writeReview/writeReview"
+        "pages/writeReview/writeReview",
+        "pages/shoppingCart/shoppingCart"
     ],
     "window": {
         "backgroundTextStyle": "light",

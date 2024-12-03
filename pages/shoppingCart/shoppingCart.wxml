@@ -1,0 +1,44 @@
+<view class="container">
+  <!-- 购物车列表 -->
+  <view class="cart-list">
+    <block wx:for="{{cartItems}}" wx:key="id">
+      <view class="cart-item">
+        <!-- 菜品照片 -->
+        <image class="food-photo" src="{{item.photo}}" mode="aspectFill" />
+
+        <view class="food-info">
+          <!-- 菜品名称 -->
+          <text class="food-name">{{item.name}}</text>
+          <!-- 菜品价格 -->
+          <text class="food-price">¥{{item.price}}</text>
+        </view>
+
+        <view class="quantity-control">
+          <!-- 减少数量按钮 -->
+          <button class="quantity-btn" bindtap="decreaseQuantity" data-id="{{item.id}}">-</button>
+          <!-- 当前数量 -->
+          <text class="quantity">{{item.quantity}}</text>
+          <!-- 增加数量按钮 -->
+          <button class="quantity-btn" bindtap="increaseQuantity" data-id="{{item.id}}">+</button>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 购物车底部统计 -->
+  <view class="cart-summary">
+    <view class="total-items">
+      <!-- 总计菜品数量 -->
+      <text>总计：{{totalItems}}个菜品</text>
+    </view>
+    <view class="total-price">
+      <!-- 总计价格 -->
+      <text>共计：¥{{totalPrice}}</text>
+    </view>
+  </view>
+
+  <!-- 去结算按钮 -->
+  <view class="checkout-btn">
+    <button bindtap="goToCheckout">去结算</button>
+  </view>
+</view>

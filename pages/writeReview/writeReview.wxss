@@ -48,3 +48,46 @@
     border-radius: 5px;
     font-size: 16px;
 }
+
+.stu-score-view1 {
+    height: 60rpx;
+    line-height: 50rpx;
+    align-items: center;
+    display: flex;
+}
+
+.stu-score-text {
+    width: 184rpx;
+    font-size: 30rpx;
+    border: 1px solid #ccc;
+    border-radius: 8rpx;
+    display: inline-block;
+    padding: 0 30rpx;
+    margin-right: 12rpx;
+    box-sizing: border-box;
+}
+
+.score_box1 {
+    width: 24rpx;
+    height: 48rpx;
+    overflow: hidden;
+    padding-left: 8rpx;
+}
+
+.score_box2 {
+    width: 24rpx;
+    height: 48rpx;
+    overflow: hidden;
+    padding-right: 8rpx;
+}
+
+.score_stars1 {
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.score_stars2 {
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: -24rpx;
+}
