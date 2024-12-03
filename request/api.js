@@ -5,7 +5,7 @@
 const request = require("./request")
 module.exports = {
     // 微信登录
-    login(data){
+    login(data) {
         return request.post('login', data)
     },
     // 商务合作
@@ -13,7 +13,28 @@ module.exports = {
         return request.post('customer/merchant-application', data)
     },
     // 个人信息保存
-    ChangeProfile(data){
+    ChangeProfile(data) {
         return request.post('customer/info', data);
-    }
+    },
+    // 获取商店的所有商品和类别
+    GetRestaurantInfo(data) {
+        const restaurantId = data.restaurant_id;
+        const url = `customer/restaurant/${restaurantId}/categories/dishes`;
+        return request.get(url);
+    },
+    // 获取购物车逻辑
+    GetCart(data) {
+        const restaurantId = data.restaurant_id;
+        const url = `customer/cart/restaurant/${restaurantId}`;
+        return request.get(url);
+    },
+    // 更新购物车逻辑
+    UpdateCart(data) {
+        const restaurantId = data.restaurant_id;
+        const url = `customer/cart/restaurant/${restaurantId}`;
+
+        // 删除 data 对象中的 restaurant_id 属性
+        delete data.restaurant_id;
+        return request.post(url, data);
+    },
 }
