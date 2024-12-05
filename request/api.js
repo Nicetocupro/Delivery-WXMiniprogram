@@ -60,4 +60,14 @@ module.exports = {
         return request.put(`customer/addressbook/${id}/default`);
     },
 
+    //获得所有店铺及商品（以及商品照片）
+    GetAllRestaurants(){
+        return request.get('customer/restaurants');
+    },
+    GetAllDishes(id){
+        return request.get(`customer/restaurant/${id}/dishes/top`); 
+    },
+    GetImage(url , Image){
+      return request.getImage(url + Image);
+    }
 }
