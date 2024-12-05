@@ -37,19 +37,42 @@ module.exports = {
         delete data.restaurant_id;
         return request.post(url, data);
     },
+    // 收货地址管理
+    //新增收获地址
+    addAddress(data){
+        return request.post('customer/addressbook',data);
+    },
+    //获取当前用户所有收货地址
+    getAddress(data){
+        return request.get('customer/addressbook');
+    },
+    //删除某一个收货地址
+    deleteAddress(id){
+        return request.delete(`customer/addressbook/${id}`);
+    },
+    //编辑一个收货地址
+    changeAddress(data, id){
+        return request.put(`customer/addressbook/${id}`, data);
+    },
+    //将某一个收货地址设为默认
+    setDefaultAddress(id){
+        return request.put(`customer/addressbook/${id}/default`);
+    },
+    //获得所有店铺及商品（以及商品照片）
+    GetAllRestaurants(){
+        return request.get('customer/restaurants');
+    },
+    GetAllDishes(id){
+        return request.get(`customer/restaurant/${id}/dishes/top`); 
+    },
+    GetImage(url , Image){
+      return request.getImage(url + Image);
+    },
     // 获得用户订单
     GetOrders() {
         return request.get('customer/orders')
     },
-    // 获得一个顾客的所有地址簿
-    GetAddressBook() {
-        return request.get('customer/addressbook')
-    },
-    // 给顾客创造一个新的地址簿
-    SetAddressBook(data) {
-        return request.post('customer/addressbook', data)
-    },
-    // 下订单
+        // 下订单
     PlaceOrder(data) {
         const restaurantId = data.restaurant_id;
         delete data.restaurant_id;

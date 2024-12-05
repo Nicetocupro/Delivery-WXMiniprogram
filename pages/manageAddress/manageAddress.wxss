@@ -1,44 +1,118 @@
-.container {  
-    padding: 20rpx; /* 修改为rpx */  
-  }  
-    
-  .add-button {  
-    background-color: #1aad19;  
-    color: white;  
-    padding: 10rpx; /* 修改为rpx */  
-    border: none;  
-    border-radius: 4rpx; /* 圆角也使用rpx */  
-    margin-bottom: 20rpx; /* 修改为rpx */  
-  }  
-    
-  .address-list {  
-    margin-top: 10rpx; /* 修改为rpx */  
-    overflow-y: auto; /* 如果地址列表很长，允许垂直滚动 */  
-    max-height: calc(100vh - 120rpx); /* 确保列表不会超出屏幕高度，这里假设顶部和底部有足够的空间 */  
-  }  
-    
-  .address-item {  
-    border: 1rpx solid #ccc; /* 修改为rpx */  
-    border-radius: 4rpx; /* 圆角也使用rpx */  
-    padding: 15rpx; /* 修改为rpx */  
-    margin-bottom: 10rpx; /* 修改为rpx */  
-    box-sizing: border-box; /* 确保padding和border不会增加元素的总宽度 */  
-  }  
-    
-  .address-details {  
-    margin-bottom: 10rpx; /* 修改为rpx */  
-  }  
-    
-  .address-actions {  
-    display: flex;  
-    justify-content: space-between;  
-    flex-wrap: wrap; /* 如果按钮很多，允许它们换行 */  
-  }  
-    
-  .default-button, .edit-button, .delete-button {  
-    background-color: #f5f5f5;  
-    border: none;  
-    padding: 5rpx; /* 修改为rpx */  
-    border-radius: 4rpx; /* 圆角也使用rpx */  
-    margin-left: 5rpx; /* 修改为rpx */  
-  }
+/* 页面整体容器 */
+.container {
+    padding: 20rpx;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 100rpx; /* 留出空间给底部按钮 */
+}
+
+/* 新增收货地址按钮 */
+.add-button {
+    position: fixed;
+    bottom: 20rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 20rpx;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    font-size: 28rpx;
+    border-radius: 5rpx;
+    text-align: center;
+}
+
+/* 地址列表 */
+.address-list {
+    flex: 1;
+    margin-bottom: 100rpx; /* 给底部按钮留出空间 */
+    padding-bottom: 10rpx; /* 调整底部间距 */
+    width: 90%;
+}
+
+/* 单个地址项 */
+.address-item {
+    display: flex;
+    flex-direction: column; /* 地址卡片内部采用垂直布局 */
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10rpx;
+    padding: 20rpx;
+    margin-bottom: 10rpx;
+    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 95%; /* 地址卡片宽度占满父容器 */
+    max-width: 1000rpx; /* 限制最大宽度 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 默认地址的特殊样式 */
+.default-selected {
+    border: 2rpx solid #f39c12; /* 边框颜色突出显示 */
+    background-color: #fff7e6; /* 背景色稍微变淡 */
+    display: flex;
+    flex-direction: column; /* 地址卡片内部采用垂直布局 */
+    justify-content: space-between;
+    border-radius: 10rpx;
+    padding: 20rpx;
+    margin-bottom: 10rpx;
+    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 95%; /* 地址卡片宽度占满父容器 */
+    max-width: 1000rpx; /* 限制最大宽度 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 地址详情部分 */
+.address-details {
+    flex: 1;
+}
+
+/* 地址文字内容 */
+.address-details text {
+    display: block;
+    color: #333;
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+}
+
+/* 地址操作按钮区域 */
+.address-actions {
+    display: flex;
+    justify-content: space-between; /* 水平排列按钮 */
+    margin-top: 15rpx; /* 给按钮区域顶部留出空间 */
+}
+
+/* 操作按钮的基础样式 */
+.address-actions button {
+    font-size: 24rpx;
+    padding: 10rpx;
+    border-radius: 5rpx;
+    border: none;
+    cursor: pointer;
+    width: 150rpx;
+    text-align: center;
+}
+
+/* "默认地址" 按钮样式 */
+.default-button {
+    background-color: #f39c12;
+    color: white;
+}
+
+/* "编辑" 按钮样式 */
+.edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+/* "删除" 按钮样式 */
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
