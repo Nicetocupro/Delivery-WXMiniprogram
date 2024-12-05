@@ -37,4 +37,27 @@ module.exports = {
         delete data.restaurant_id;
         return request.post(url, data);
     },
+    // 获得用户订单
+    GetOrders() {
+        return request.get('customer/orders')
+    },
+    // 获得一个顾客的所有地址簿
+    GetAddressBook() {
+        return request.get('customer/addressbook')
+    },
+    // 给顾客创造一个新的地址簿
+    SetAddressBook(data) {
+        return request.post('customer/addressbook', data)
+    },
+    // 下订单
+    PlaceOrder(data) {
+        const restaurantId = data.restaurant_id;
+        delete data.restaurant_id;
+        return request.post(`customer/order/restaurant/${restaurantId}`, data)
+    },
+    // 取消订单
+    CancelOrder(data) {
+        const order_id = data.order_id;
+        return request.post(`customer/order/${order_id}/cancel`)
+    }
 }

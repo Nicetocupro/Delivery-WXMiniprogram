@@ -4,19 +4,10 @@
     color: #7bbfea;
     align-self: center;
     display: flex;
-    /*设置显示样式**/
-
     align-items: center;
-    /**子view垂直居中*/
-
     vertical-align: center;
-    /**垂直居中*/
-
     justify-content: center;
-    /**内容居中*/
-
     flex-direction: row;
-
 }
 
 .divideline {
@@ -34,16 +25,12 @@
     height: 100px;
 }
 
-
-
 .list .list_item {
     margin-top: 10px;
     padding: 10px;
     height: 100px;
     border-bottom: 1px solid #E8E8E8;
 }
-
-
 
 .list .list_item .img {
     float: left;
@@ -130,10 +117,9 @@
     border-radius: 50%;
     margin-top: -200rpx;
     margin-left: 530rpx;
-    position: absolute
+    position: absolute;
 }
 
 .t {
     color: gray;
-
 }
