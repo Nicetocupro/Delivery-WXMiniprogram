@@ -32,7 +32,7 @@
         <scroll-view class="product-list" scroll-y>
             <block wx:for="{{selectedCategoryProducts}}" wx:key="id">
                 <view class="product-card">
-                    <image class="product-image" src="{{item.image}}" alt="product image" />
+                    <image class="product-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{item.image}}/?session_id={{session_id}}" alt="product image" />
                     <view class="product-details">
                         <text class="product-name">{{item.name}}</text>
                         <view class="product-info">
@@ -53,6 +53,6 @@
     <!-- 底部按钮 -->
     <view class="bottom-buttons-container">
         <button class="cart-button" bindtap="goToCart">购物车</button>
-        <button class="checkout-button" bindtap="goToCheckout">去结算</button>
+        <button class="checkout-button" bindtap="goToCart">去结算</button>
     </view>
 </view>

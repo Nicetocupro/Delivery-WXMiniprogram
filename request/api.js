@@ -37,7 +37,6 @@ module.exports = {
         delete data.restaurant_id;
         return request.post(url, data);
     },
-
     // 收货地址管理
     //新增收获地址
     addAddress(data){
@@ -59,7 +58,6 @@ module.exports = {
     setDefaultAddress(id){
         return request.put(`customer/addressbook/${id}/default`);
     },
-
     //获得所有店铺及商品（以及商品照片）
     GetAllRestaurants(){
         return request.get('customer/restaurants');
@@ -69,5 +67,20 @@ module.exports = {
     },
     GetImage(url , Image){
       return request.getImage(url + Image);
+    },
+    // 获得用户订单
+    GetOrders() {
+        return request.get('customer/orders')
+    },
+        // 下订单
+    PlaceOrder(data) {
+        const restaurantId = data.restaurant_id;
+        delete data.restaurant_id;
+        return request.post(`customer/order/restaurant/${restaurantId}`, data)
+    },
+    // 取消订单
+    CancelOrder(data) {
+        const order_id = data.order_id;
+        return request.post(`customer/order/${order_id}/cancel`)
     }
 }

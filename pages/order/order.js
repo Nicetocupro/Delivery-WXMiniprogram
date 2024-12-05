@@ -1,3 +1,5 @@
+const api = require("../../request/api");
+
 Component({
     properties: {
         activeStatus: {
@@ -6,50 +8,30 @@ Component({
         },
         order_data: {
             type: Array,
-            value: [{
-                    oid: 1,
-                    accept: 3,
-                    price: 20,
-                    date: '2020-06-27 16:42'
-                },
-                {
-                    oid: 2,
-                    accept: 2,
-                    price: 30,
-                    date: '2020-06-27 17:20'
-                },
-                {
-                    oid: 3,
-                    accept: 1,
-                    price: 25,
-                    date: '2020-06-28 18:45'
-                },
-                {
-                    oid: 4,
-                    accept: 0,
-                    price: 15,
-                    date: '2020-06-29 19:30'
-                },
-            ]
+            value: []
         }
     },
 
     data: {
         statusTabs: [{
+                status: 0,
+                label: "未支付"
+            },
+            {
+                status: 1,
+                label: "已支付"
+            },
+            {
+                status: 2,
+                label: "等待配送"
+            },
+            {
                 status: 3,
                 label: "已完成"
             },
             {
-                status: 2,
-                label: "配送中"
-            },
-            {
-                status: 1,
-                label: "待接单"
-            },
-            {
-                status: 0,
-                label: "制作中"
+                status: 4,
+                label: "已取消"
             }
         ],
         filteredOrders: []
@@ -62,28 +44,44 @@ Component({
     },
 
     attached: function () {
-        this.filterOrders(this.data.activeStatus);
+        this.fetchOrders(); // 初始化时从后端获取订单数据
     },
 
     methods: {
+        // 从后端获取订单数据
+        fetchOrders: function () {
+            api.GetOrders()
+            .then(res =>{
+                console.log(res);
+                this.setData({
+                    order_data: res.data.data.orders
+                });
+                this.filterOrders(this.data.activeStatus); // 获取数据后重新筛选订单
+            })
+        },
+
         // 切换订单分类并筛选数据
         filterOrders: function (status) {
             const statusMap = {
+                0: {
+                    text: "未支付",
+                    image: "/asserts/images/order/unpaid.png"
+                },
+                1: {
+                    text: "已支付",
+                    image: "/asserts/images/order/paid.png"
+                },
+                2: {
+                    text: "等待配送",
+                    image: "/asserts/images/order/waiting.png"
+                },
                 3: {
                     text: "已完成",
                     image: "/asserts/images/order/finish.png"
                 },
-                2: {
-                    text: "配送中",
-                    image: "/asserts/images/order/d2.png"
-                },
-                1: {
-                    text: "待接单",
-                    image: "/asserts/images/order/d1.png"
-                },
-                0: {
-                    text: "制作中",
-                    image: "/asserts/images/order/d0.png"
+                4: {
+                    text: "已取消",
+                    image: "/asserts/images/order/cancel.png"
                 }
             };
 
@@ -92,8 +90,8 @@ Component({
 
             const filteredOrders = this.data.order_data
                 .filter(order => {
-                    console.log('order.accept:', order.accept, 'status:', status); // 打印每个订单的 accept 和筛选条件
-                    return order.accept === status;
+                    console.log('order.status:', order.status, 'status:', status); // 打印每个订单的 accept 和筛选条件
+                    return order.status === status;
                 })
                 .map(order => ({
                     ...order,
@@ -122,9 +120,9 @@ Component({
         // 查看订单详情
         goto_order: function (e) {
             const index = e.currentTarget.dataset.index;
-            const oid = this.data.filteredOrders[index].oid;
+            const id = this.data.filteredOrders[index].id;
             wx.navigateTo({
-                url: `/pages/order_info/order_info?oid=${oid}`
+                url: `/pages/order_info/order_info?id=${id}`
             });
         }
     }
