@@ -56,10 +56,27 @@
         <scroll-view class="review-list" scroll-y>
             <block wx:for="{{reviews}}" wx:key="id">
                 <view class="review-card">
-                    <view class="review-details">
-                        <text class="review-user">{{item.user}}</text>
-                        <text class="review-content">{{item.content}}</text>
-                        <image class="review-image" src="{{item.image}}" mode="aspectFit" bindtap="previewImage" data-src="{{item.image}}"></image>
+                    <view class="review-header">
+                        <image class="review-avatar" src="{{item.wechat_user.profile_image_url}}" mode="aspectFill"></image>
+                        <text class="review-username">{{item.wechat_user.nickname}}</text>
+                        <text class="review-rating">{{item.rating}} 星</text>
+                    </view>
+                    <view class="review-content">
+                        <text>{{item.content}}</text>
+                    </view>
+                    <view class="review-images">
+                        <block wx:for="{{item.comment_details}}" wx:key="id">
+                            <image class="review-image" src="{{item.image_path}}" mode="aspectFill" bindtap="previewImage" data-src="{{item.image_path}}"></image>
+                        </block>
+                    </view>
+                    <view class="review-replies">
+                        <block wx:for="{{item.replies}}" wx:key="id">
+                            <view class="reply-card">
+                                <image class="reply-avatar" src="{{item.wechat_user.profile_image_url}}" mode="aspectFill"></image>
+                                <text class="reply-username">{{item.wechat_user.nickname}}</text>
+                                <text class="reply-content">{{item.content}}</text>
+                            </view>
+                        </block>
                     </view>
                 </view>
             </block>

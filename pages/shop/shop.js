@@ -24,30 +24,7 @@ Page({
         selectedCategoryId: 1,
         selectedCategoryProducts: [], // 当前选择类目的商品数据
 
-        reviews: [
-            {
-              id: 1,
-              user: '用户1',
-              content: '这家店的食物非常美味，服务也很好！',
-              image: '../../asserts/images/comments/dz.png',
-            },
-            {
-              id: 2,
-              user: '用户2',
-              content: '环境很好，适合家庭聚餐。',
-              image: '../../asserts/images/comments/tea.png',
-            },
-            {
-              id: 3,
-              user: '用户3',
-              content: '价格实惠，性价比高。',
-              image: '../../asserts/images/comments/chad.png',
-            }
-          ],
-        // 当前选择的商品类目ID
-        selectedCategoryId: 1,
-        selectedCategoryProducts: [], // 当前选择类目的商品数据
-
+        reviews: [],
         selectedPage: 'products'
     },
 
@@ -60,11 +37,19 @@ Page({
         */
         let data = {
             restaurant_id: this.data.restaurant_id
-        }
-        api.GetRestaurantInfo(data)
-            .then(response => {
-                console.log(response);
-                const categories = response.data.data.categories;
+        };
+
+        // 使用 Promise.all 同时执行两个 API 调用
+        Promise.all([
+                api.GetRestaurantInfo(data),
+                api.FetchComments(data)
+            ])
+            .then(([restaurantResponse, commentsResponse]) => {
+                console.log(restaurantResponse);
+                console.log(commentsResponse);
+
+                // 处理餐厅信息
+                const categories = restaurantResponse.data.data.categories;
                 const products = [];
 
                 categories.forEach(category => {
@@ -81,8 +66,8 @@ Page({
                     });
                 });
 
-                console.log(categories)
-                console.log(products)
+                console.log(categories);
+                console.log(products);
 
                 this.setData({
                     categories: categories,
@@ -91,7 +76,71 @@ Page({
                 });
 
                 this.filterProductsByCategory();
+
+                // 处理评论数据
+                const comments = commentsResponse.data.data.comments;
+
+                // 检查 comments 是否存在且是一个数组
+                if (Array.isArray(comments)) {
+                    const reviews = comments.map(comment => {
+                        return {
+                            id: comment.id,
+                            content: comment.content,
+                            rating: comment.rating,
+                            created_at: comment.created_at,
+                            updated_at: comment.updated_at,
+                            wechat_user: {
+                                id: comment.wechat_user.id,
+                                nickname: comment.wechat_user.nickname,
+                                phone_number: comment.wechat_user.phone_number,
+                                profile_image_url: comment.wechat_user.profile_image_url,
+                                role: comment.wechat_user.role,
+                                created_at: comment.wechat_user.created_at,
+                                updated_at: comment.wechat_user.updated_at
+                            },
+                            replies: Array.isArray(comment.replies) ? comment.replies.map(reply => {
+                                return {
+                                    id: reply.id,
+                                    content: reply.content,
+                                    created_at: reply.created_at,
+                                    updated_at: reply.updated_at,
+                                    wechat_user: {
+                                        id: reply.wechat_user.id,
+                                        nickname: reply.wechat_user.nickname,
+                                        phone_number: reply.wechat_user.phone_number,
+                                        profile_image_url: reply.wechat_user.profile_image_url,
+                                        role: reply.wechat_user.role,
+                                        created_at: reply.wechat_user.created_at,
+                                        updated_at: reply.wechat_user.updated_at
+                                    }
+                                };
+                            }) : [],
+                            comment_details: Array.isArray(comment.comment_details) ? comment.comment_details.map(detail => {
+                                return {
+                                    id: detail.id,
+                                    image_path: detail.image_path,
+                                    created_at: detail.created_at,
+                                    updated_at: detail.updated_at
+                                };
+                            }) : []
+                        };
+                    });
+
+                    this.setData({
+                        reviews: reviews
+                    });
+
+                    console.log('Formatted reviews:', reviews);
+                } else {
+                    console.error('Invalid comments data:', comments);
+                    this.setData({
+                        reviews: []
+                    });
+                }
             })
+            .catch(error => {
+                console.error('API calls failed:', error);
+            });
     },
 
     // 选择商品类目
@@ -182,31 +231,31 @@ Page({
 
     // 去结算页面
     goToCheckout() {
-      wx.navigateTo({
-        url: '/pages/checkout/checkout'
-      });
-    },
-
-     // 选择页面
-    selectPage(e) {
-        const page = e.currentTarget.dataset.page;
-        this.setData({
-        selectedPage: page
+        wx.navigateTo({
+            url: '/pages/checkout/checkout'
         });
     },
 
-    previewImage: function(e) {
+    // 选择页面
+    selectPage(e) {
+        const page = e.currentTarget.dataset.page;
+        this.setData({
+            selectedPage: page
+        });
+    },
+
+    previewImage: function (e) {
         const current = e.currentTarget.dataset.src;
         const urls = [current];
         console.log(current);
         console.log(urls);
         wx.previewImage({
-          current: current, // 当前显示图片的链接
-          urls: urls // 需要预览的图片链接列表
+            current: current, // 当前显示图片的链接
+            urls: urls // 需要预览的图片链接列表
         });
-      },
+    },
 
-      writeReview: function() {
+    writeReview: function () {
         wx.navigateTo({
             url: '/pages/writeReview/writeReview'
         });
@@ -222,7 +271,7 @@ Page({
         const seconds = String(date.getSeconds()).padStart(2, '0');
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
-    
+
     goToCart() {
         console.log(this.data.products);
         const products = JSON.stringify(this.data.products);

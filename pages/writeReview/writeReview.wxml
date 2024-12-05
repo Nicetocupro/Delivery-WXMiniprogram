@@ -9,7 +9,6 @@
         </block>
     </view>
 
-
     <button class="upload-button" bindtap="chooseImage">上传照片</button>
     <view class="image-container" wx:if="{{images.length > 0}}">
         <image class="review-image" src="{{item.thumb}}" mode="aspectFit" wx:for="{{images}}" wx:key="index" />

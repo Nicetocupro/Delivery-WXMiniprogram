@@ -4,135 +4,136 @@
     flex-direction: column;
     height: 100%;
     background-color: #f9f9f9;
-  }
-  
-  /* 店家信息区域样式 */
-  .store-info {
+}
+
+/* 店家信息区域样式 */
+.store-info {
     display: flex;
     align-items: center;
     padding: 15px;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .store-logo {
+}
+
+.store-logo {
     width: 50px;
     height: 50px;
     border-radius: 25px;
     margin-right: 15px;
-  }
-  
-  .store-details {
+}
+
+.store-details {
     display: flex;
     flex-direction: column;
-  }
-  
-  .store-name {
+}
+
+.store-name {
     font-size: 18px;
     font-weight: bold;
     color: #333;
-  }
-  
-  .store-location {
+}
+
+.store-location {
     font-size: 14px;
     color: #888;
-  }
-  
-  /* 轮播图样式 */
-  .store-swiper {
+}
+
+/* 轮播图样式 */
+.store-swiper {
     height: 180px;
     margin-top: 10px;
-  }
-  
-  .swiper-image {
+}
+
+.swiper-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  /* 商品类目容器样式 */
-  .menu-container {
+}
+
+/* 商品类目容器样式 */
+.menu-container {
     display: flex;
     height: 370px;
     margin-top: 15px;
     margin-bottom: 0px;
-  }
-  
-  /* 左侧商品类目 */
-  .categories {
+}
+
+/* 左侧商品类目 */
+.categories {
     width: 100px;
     background-color: #fff;
     border-right: 1px solid #e0e0e0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100%;
-  }
-  
-  .category-item {
+}
+
+.category-item {
     padding: 12px;
     text-align: center;
     cursor: pointer;
     font-size: 16px;
     color: #555;
-  }
-  
-  .category-item.active {
+}
+
+.category-item.active {
     background-color: #2cc2c3;
     color: white;
-  }
-  
-  /* 商品列表 */
-  .product-list {
-    flex: 1;  /* 占据剩余空间 */
+}
+
+/* 商品列表 */
+.product-list {
+    flex: 1;
+    /* 占据剩余空间 */
     padding: 10px;
     overflow-y: auto;
     background-color: #fff;
-  }
-  
-  .product-card {
+}
+
+.product-card {
     display: flex;
     margin-bottom: 15px;
     padding: 10px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-image {
+}
+
+.product-image {
     width: 80px;
     height: 80px;
     margin-right: 15px;
     border-radius: 5px;
     object-fit: cover;
-  }
-  
-  .product-details {
+}
+
+.product-details {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: calc(100% - 95px);
-  }
-  
-  .product-name {
+}
+
+.product-name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
-  }
-  
-  .product-info {
+}
+
+.product-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-  }
-  
-  .product-price {
+}
+
+.product-price {
     font-size: 14px;
     color: #ff5722;
-  }
-  
-  .spec-button {
+}
+
+.spec-button {
     padding: 6px 12px;
     background-color: #2cc2c3;
     color: #fff;
@@ -140,10 +141,10 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-  }
-  
-  /* 底部按钮样式 */
-  .bottom-buttons-container {
+}
+
+/* 底部按钮样式 */
+.bottom-buttons-container {
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -154,10 +155,12 @@
     width: 100%;
     z-index: 10;
     box-sizing: border-box;
-  }
-  
-  .cart-button, .checkout-button {
-    width: 48%;  /* 确保两个按钮在一行 */
+}
+
+.cart-button,
+.checkout-button {
+    width: 48%;
+    /* 确保两个按钮在一行 */
     padding: 10px 0;
     background-color: #2cc2c3;
     color: white;
@@ -165,66 +168,116 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .cart-button {
-    background-color: #007aff;
-  }
-  
-  .checkout-button {
-    background-color: #ff5722;
-  }
+}
 
-  .tab-bar {
+.cart-button {
+    background-color: #007aff;
+}
+
+.checkout-button {
+    background-color: #ff5722;
+}
+
+.tab-bar {
     top: 5px;
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 10px 0px;
     font-size: 16px;
-  }
+}
 
-  .review-container {
+.review-container {
     padding: 20rpx;
-    margin-bottom: 120rpx;
-  }
-  
-  .review-list {
+}
+
+.review-list {
     height: 100%;
-  }
-  
-  .review-card {
+}
+
+.review-card {
     background-color: #fff;
     border-radius: 10rpx;
     margin-bottom: 20rpx;
     padding: 20rpx;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-details {
+    box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
     display: flex;
-    flex-direction: column;
-  }
-  
-  .review-user {
-    font-size: 32rpx;
-    font-weight: bold;
-    margin-bottom: 10rpx;
-  }
-  
-  .review-content {
-    font-size: 28rpx;
+    align-items: center;
     margin-bottom: 20rpx;
-  }
-  
-  .review-image {
+}
+
+.review-avatar {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.review-username {
+    font-size: 30rpx;
+    font-weight: bold;
+    margin-right: 10rpx;
+}
+
+.review-rating {
+    font-size: 24rpx;
+    color: #ff9800;
+}
+
+.review-content {
+    font-size: 28rpx;
+    color: #333;
+    margin-bottom: 20rpx;
+}
+
+.review-images {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20rpx;
+}
+
+.review-image {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 10rpx;
+    margin-bottom: 10rpx;
+    border-radius: 5rpx;
+}
+
+.review-replies {
+    margin-top: 20rpx;
+}
+
+.reply-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rpx;
+}
+
+.reply-avatar {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    margin-right: 10rpx;
+}
+
+.reply-username {
+    font-size: 24rpx;
+    font-weight: bold;
+    margin-right: 10rpx;
+}
+
+.reply-content {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.review-button {
     width: 100%;
-    height: auto;
-    border-radius: 10rpx;
-    height: 200rpx
-  }
-  .review-button {
-    width: 100%;  /* 确保两个按钮在一行 */
+    /* 确保两个按钮在一行 */
     padding: 10px 0;
     background-color: #2cc2c3;
     color: white;
@@ -232,4 +285,4 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
