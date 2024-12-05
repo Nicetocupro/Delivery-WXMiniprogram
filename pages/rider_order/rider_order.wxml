@@ -1,4 +1,4 @@
-<view class="container" >
+<view class="container">
   <!-- TabBar -->
   <view class="tab-bar" hidden="{{ tabBarHidden }}">
     <view class="tab" bindtap="onTabChange" data-index="0" style="background-color: {{activeTab == 0 ? '#2CC2C3' : '#fff'}}">新任务</view>
@@ -12,13 +12,15 @@
     <block wx:for="{{taskList}}" wx:key="id">
       <view class="task-card">
         <view class="task-info">
-          <view class="task-address">取餐地址：{{item.pickupAddress}}</view>
-          <view class="task-address">送达地址：{{item.deliveryAddress}}</view>
-          <view class="task-amount">订单金额：¥{{item.orderAmount}}</view>
-          <view class="task-distance">总计路程：{{item.totalDistance}} km</view>
-          <view class="task-timelimit">时间限制：{{item.timeLimit}} 分钟</view>
+          <view class="task-address">取餐地址：{{item.address}}</view>
+          <view class="task-address">送达地址：{{item.restaurant_info.address}}</view>
+          <view class="task-amount">订单金额：¥6</view>
+          <!-- <view class="task-distance">总计路程：{{item.totalDistance}} km</view> -->
+          <view class="task-timelimit">时间限制：{{item.limit_time}}</view>
         </view>
-        <button class="grab-button" bindtap="onGrabTask" data-id="{{item.id}}">抢单</button>
+        <button class="action-button" bindtap="onTaskAction" data-id="{{item.id}}" data-status="{{item.status}}">
+          {{ action }}
+        </button>
       </view>
     </block>
   </scroll-view>

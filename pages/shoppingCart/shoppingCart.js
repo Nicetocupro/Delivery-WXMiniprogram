@@ -129,7 +129,7 @@ Page({
         if (this.data.totalItems > 0) {
             console.log("提交订单逻辑");
             // 首先需要它选择 地址信息等
-            api.GetAddressBook()
+            api.getAddress()
                 .then(res => {
                     console.log(res);
                     const addressBooks = res.data.data.address_books
@@ -229,7 +229,7 @@ Page({
 
                         // 同济大学 男 马恒超 15665299259
                         console.log(newAddress)
-                        api.SetAddressBook(newAddress)
+                        api.addAddress(newAddress)
                             .then(res => {
                                 console.log(res)
                                 wx.showToast({

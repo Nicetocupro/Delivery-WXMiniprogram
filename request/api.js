@@ -72,7 +72,7 @@ module.exports = {
     GetOrders() {
         return request.get('customer/orders')
     },
-        // 下订单
+    // 下订单
     PlaceOrder(data) {
         const restaurantId = data.restaurant_id;
         delete data.restaurant_id;
@@ -82,5 +82,14 @@ module.exports = {
     CancelOrder(data) {
         const order_id = data.order_id;
         return request.post(`customer/order/${order_id}/cancel`)
-    }
+    },
+
+    // 骑手订单相关
+    GetOrder(status) {
+        return request.get(`customer/order/status/${status}`)
+    },
+
+    SetOrder(orderId, nextStatus){
+        return request.put(`customer/order/${orderId}/status/${nextStatus}`)
+    },
 }

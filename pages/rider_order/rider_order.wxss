@@ -61,7 +61,7 @@
   }
   
   /* 抢单按钮 */
-  .grab-button {
+  .action-button {
     background-color: #2196F3;
     color: white;
     border: none;
@@ -71,7 +71,7 @@
     font-size: 16px;
   }
   
-  .grab-button:hover {
+  .action-button:hover {
     cursor: pointer;
   }
   
