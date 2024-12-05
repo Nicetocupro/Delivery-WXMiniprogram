@@ -3,7 +3,7 @@ const api = require("../../request/api");
 Page({
     data: {
         // 店家信息
-        restaurant_id: 1,
+        restaurant_id: null,
         session_id: null,
         storeLogo: '../../asserts/images/shopTest/logo.jpg', // 示例logo链接
         storeName: '熊大爷水饺',
@@ -26,15 +26,13 @@ Page({
     },
 
     onLoad(options) {
-        // 这个地方应该从前面传入 restaurant_id给这个页面
-        /*
+        // 传入restaurant_id
         this.setData({
-            restaurant_id : options.restaurant_id
+            restaurant_id: options.restaurant_id
         })
-        */
-       this.setData({
-           session_id: wx.getStorageSync('session_id')
-       })
+        this.setData({
+            session_id: wx.getStorageSync('session_id')
+        })
         let data = {
             restaurant_id: this.data.restaurant_id
         }

@@ -69,5 +69,4 @@
             </view>
         </block>
     </view>
-    <navigator url="/pages/shop/shop" >商家页面test</navigator>
 </view>

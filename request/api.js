@@ -72,7 +72,7 @@ module.exports = {
     GetOrders() {
         return request.get('customer/orders')
     },
-        // 下订单
+    // 下订单
     PlaceOrder(data) {
         const restaurantId = data.restaurant_id;
         delete data.restaurant_id;
