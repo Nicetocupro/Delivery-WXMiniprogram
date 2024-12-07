@@ -4,6 +4,7 @@ Page({
     data: {
         restaurant_id: null,
         session_id: null,
+        order_id: null,
         // 包含每一个菜品的id category name price image flavors description
         products: [],
         // 购物车包含所选菜品的id flavor_id count
@@ -270,7 +271,8 @@ Page({
             .then(res => {
                 console.log(res)
                 this.setData({
-                    showCheckoutPage: true,
+                    order_id: res.data.data.order_id,
+                    showCheckoutPage: true
                 });
                 this.startCountdown();
             })
@@ -279,9 +281,9 @@ Page({
     // 取消订单（待完成）
     cancelCheckout() {
         // 取消订单逻辑
-        /* 这个地方应该将order_id传入，而不是null */
+
         let data = {
-            order_id: null
+            order_id: this.data.order_id
         }
 
         api.CancelOrder(data)
@@ -297,6 +299,7 @@ Page({
     // 支付订单（待完成）
     PayOrder(){
         /** 这个地方模拟订单支付的操作，将订单的状态转变为1 */
+        
     },
 
     // 开始倒计时

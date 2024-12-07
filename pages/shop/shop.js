@@ -5,7 +5,7 @@ Page({
         // 店家信息
         restaurant_id: null,
         session_id: null,
-        storeLogo: '../../asserts/images/shopTest/logo.jpg', // 示例logo链接
+        storeLogo: '', // 示例logo链接
         storeName: null,
         storeLocation: null,
         storeImages: [],
@@ -110,6 +110,7 @@ Page({
                 }
             });
             
+            console.log(storeImages)
             this.setData({
                 storeLogo: storeImages[0],
                 storeImages: storeImages
