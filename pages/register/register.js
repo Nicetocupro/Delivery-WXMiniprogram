@@ -267,7 +267,7 @@ Page({
             .catch(err => {
                 console.error('登录失败', err);
                 wx.showToast({
-                    title: '登录失败，请重试',
+                    title: '登录失败，公共区域暂时不提供服务',
                     icon: 'none',
                 });
             });

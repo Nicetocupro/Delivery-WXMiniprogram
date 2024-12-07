@@ -49,8 +49,14 @@ const request = function (url, options) {
                         Toast(res.data.msg);
                         reject(res.data.msg);
                     }
-                } else {
-                    Toast(res.data.msg);
+                } 
+                else if(res.statusCode == 403)
+                {
+                    Toast("公共区域不提供服务");
+                    reject(res.data.msg)
+                }
+                else {
+                    Toast(res);
                     reject(res.data.msg)
                 }
             },
