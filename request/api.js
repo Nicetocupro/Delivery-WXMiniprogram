@@ -87,11 +87,15 @@ module.exports = {
     // 取消订单
     CancelOrder(data) {
         const order_id = data.order_id;
-        return request.post(`customer/order/${order_id}/cancel`);
+        return request.post(`customer/order/${order_id}/cancel`)
     },
-    // 支付订单
-    PayOrder(data){
-        const order_id = data.order_id;
-        return request.post(`customer/order/${order_id}/pay`);
-    }
+
+    // 骑手订单相关
+    GetOrder(status) {
+        return request.get(`customer/order/status/${status}`)
+    },
+
+    SetOrder(orderId, nextStatus){
+        return request.put(`customer/order/${orderId}/status/${nextStatus}`)
+    },
 }
