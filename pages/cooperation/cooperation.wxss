@@ -1,42 +1,44 @@
 .container {
     padding: 20rpx;
-  }
-  
-  .intro {
-    padding-left: 20rpx; /* 给予左侧内边距，模拟首行缩进 */
-    text-indent: 2em; /* 首行缩进2个字符宽度 */
+}
+
+.intro {
+    padding-left: 20rpx;
+    /* 给予左侧内边距，模拟首行缩进 */
+    text-indent: 2em;
+    /* 首行缩进2个字符宽度 */
     margin-bottom: 20rpx;
     font-size: 25rpx;
     color: #333;
-  }
-  
-  .form {
+}
+
+.form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .form-group {
+}
+
+.form-group {
     margin-bottom: 15rpx;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     margin-bottom: 5rpx;
     font-size: 20rpx;
     color: #555;
-  }
-  
-  .input-field {
+}
+
+.input-field {
     width: 100%;
     border: 1rpx solid rgba(204, 204, 204, 0.87);
     border-radius: 5rpx;
     padding: 10rpx;
-  }
-  
-  textarea {
+}
+
+textarea {
     height: 100px;
-  }
-  
-  button {
+}
+
+button {
     margin-top: 10px;
     padding: 10px;
     background-color: #007AFF;
@@ -44,5 +46,4 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
+}
