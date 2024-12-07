@@ -45,15 +45,13 @@
         <block wx:for="{{filteredShops}}" wx:key="id">
             <view class="shop-container">
                 <view class="shop-item">
-                    <image class="shop-logo" src="/asserts/images/takeaway/breakfast.png" />
                     <view class="shop-info">
                         <navigator url="/pages/shop/shop?restaurant_id={{item.id}}" class="shop-name">{{item.restaurant_name}}</navigator>
                         <text class="shop-description">{{item.description}}</text>
                     </view>
                     <text class="shop-rating">{{item.rating}} 分</text>
                 </view>
-                <text class="shop-description">最小配送金额：{{item.minimum_delivery_amount}}元\n</text>
-                <text class="shop-description">地址：{{item.address}}</text>
+                <text class="shop-description">最小配送金额：{{item.minimum_delivery_amount}}元\n地址：{{item.address}}</text>
 
                 <view class="product-list">
                     <block wx:for="{{item.products}}" wx:key="id">
@@ -69,4 +67,7 @@
             </view>
         </block>
     </view>
+
+    <text>\n\n\n</text>
+
 </view>
