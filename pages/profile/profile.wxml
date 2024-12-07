@@ -32,8 +32,8 @@
   <view class="section-container">
     <view class="section-title">工具与服务</view>
     <view class="section-content">
-      <view class="section-item">
-        <image src="{{userInfo.avatarUrl}}" />
+      <view class="section-item" >
+        <image src="/asserts/images/profile/identify.png" bindtap="rider_identify" />
         <text>跑腿认证</text>
       </view>
       <view class="section-item">

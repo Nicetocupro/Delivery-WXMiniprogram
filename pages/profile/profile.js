@@ -39,6 +39,17 @@ Component({
           }
         });
       },
+      rider_identify: function () {
+        wx.navigateTo({
+            url: '/pages/rider_identify/rider_identify',
+            success: function (res) {
+              console.log('骑手身份认证_跳转成功');
+            },
+            fail: function (err) {
+              console.error('骑手身份认证_跳转失败', err);
+            }
+          }); 
+      },
   
       // 投诉反馈跳转
       complainFeedback: function () {
