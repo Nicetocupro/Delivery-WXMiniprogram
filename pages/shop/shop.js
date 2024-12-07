@@ -172,7 +172,7 @@ Page({
     // 获取顶部图片
     async GetAllDishes(data) {
         try {
-            const response = await api.GetAllDishes(data.restaurant_id);
+            const response = await api.GetAllDishes(this.data.restaurant_id);
             console.log(response);
             // 提取菜品图片并添加到 storeImages 数组中
             let storeImages = [];
@@ -191,8 +191,6 @@ Page({
             console.error('Error fetching dishes message:', error);
         }
     },
-
-
 
     // 选择商品类目
     selectCategory(e) {
