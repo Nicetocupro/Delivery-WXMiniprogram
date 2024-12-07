@@ -267,7 +267,7 @@ Page({
         }
 
         console.log(data)
-        api.PlaceOrder(data)
+        api.PlaceUserOrder(data)
             .then(res => {
                 console.log(res)
                 this.setData({
@@ -286,7 +286,7 @@ Page({
             order_id: this.data.order_id
         }
 
-        api.CancelOrder(data)
+        api.CancelUserOrder(data)
             .then(res => {
                 console.log(res);
                 this.stopCountdown();
@@ -305,7 +305,7 @@ Page({
             order_id: this.data.order_id
         }
 
-        api.PayOrder(data)
+        api.PayUserOrder(data)
             .then(res => {
                 console.log(res);
                 this.stopCountdown();

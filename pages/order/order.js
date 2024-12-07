@@ -50,7 +50,7 @@ Component({
     methods: {
         // 从后端获取订单数据
         fetchOrders: function () {
-            api.GetOrders()
+            api.GetUserOrders()
                 .then(res => {
                     console.log(res);
                     this.setData({

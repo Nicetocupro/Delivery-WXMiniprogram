@@ -81,7 +81,7 @@ Component({
             });
 
             const status = parseInt(this.data.activeTab) + 1; // 获取当前tab对应的任务状态
-            api.GetOrder(status).then(res => {
+            api.GetRiderOrder(status).then(res => {
                 console.log("获取订单，订单状态：", status);
                 const orders = res.data.data.orders;
                 const updatedOrders = orders.map(order => {
@@ -129,7 +129,7 @@ Component({
         },
 
         grabTask: function (taskId) {
-            api.SetOrder(taskId, 2).then(res => {
+            api.SetRiderOrder(taskId, 2).then(res => {
                 if (res.data.data.success) {
                     wx.showToast({
                         title: '抢单成功',
@@ -152,7 +152,7 @@ Component({
         },
 
         pickUpTask: function (taskId) {
-            api.SetOrder(taskId, 3).then(res => {
+            api.SetRiderOrder(taskId, 3).then(res => {
                 if (res.data.data.success) {
                     wx.showToast({
                         title: '取货成功',
@@ -174,7 +174,7 @@ Component({
         },
 
         deliverTask: function (taskId) {
-            api.SetOrder(taskId, 4).then(res => {
+            api.SetRiderOrder(taskId, 4).then(res => {
                 if (res.data.data.success) {
                     wx.showToast({
                         title: '送达成功',
