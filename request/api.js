@@ -22,6 +22,12 @@ module.exports = {
         const url = `customer/restaurant/${restaurantId}/categories/dishes`;
         return request.get(url);
     },
+    // 获取商店的商家信息
+    GetRestaurantMsg(data){
+        const restaurantId = data.restaurant_id;
+        const url = `customer/restaurant/${restaurantId}`;
+        return request.get(url);
+    },
     // 获取购物车逻辑
     GetCart(data) {
         const restaurantId = data.restaurant_id;
@@ -81,6 +87,11 @@ module.exports = {
     // 取消订单
     CancelOrder(data) {
         const order_id = data.order_id;
-        return request.post(`customer/order/${order_id}/cancel`)
+        return request.post(`customer/order/${order_id}/cancel`);
+    },
+    // 支付订单
+    PayOrder(data){
+        const order_id = data.order_id;
+        return request.post(`customer/order/${order_id}/pay`);
     }
 }

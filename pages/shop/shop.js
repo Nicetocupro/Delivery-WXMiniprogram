@@ -5,14 +5,10 @@ Page({
         // 店家信息
         restaurant_id: null,
         session_id: null,
-        storeLogo: '../../asserts/images/shopTest/logo.jpg', // 示例logo链接
-        storeName: '熊大爷水饺',
-        storeLocation: '嘉定区安亭镇曹安公路4800号同济大学满天星广场',
-        storeImages: [
-            '../../asserts/images/shopTest/1.jpg',
-            '../../asserts/images/shopTest/2.jpg',
-            '../../asserts/images/shopTest/3.jpg'
-        ],
+        storeLogo: '', // 示例logo链接
+        storeName: null,
+        storeLocation: null,
+        storeImages: [],
 
         // 商品类目
         categories: [],
@@ -26,47 +22,103 @@ Page({
     },
 
     onLoad(options) {
+        console.log(options)
         // 传入restaurant_id
         this.setData({
             restaurant_id: options.restaurant_id
-        })
+        });
         this.setData({
             session_id: wx.getStorageSync('session_id')
-        })
+        });
         let data = {
             restaurant_id: this.data.restaurant_id
-        }
-        api.GetRestaurantInfo(data)
-            .then(response => {
-                console.log(response);
-                const categories = response.data.data.categories;
-                const products = [];
+        };
+        this.fetchData(data);
+    },
 
-                categories.forEach(category => {
-                    category.dishes.forEach(dish => {
-                        products.push({
-                            id: dish.id,
-                            categoryId: category.id,
-                            name: dish.name,
-                            price: dish.price / 100.00,
-                            image: dish.image,
-                            description: dish.description,
-                            flavors: dish.flavors
-                        });
+    async fetchData(data) {
+        try {
+            await this.GetRestaurantInfo(data);
+            await this.GetRestaurantMsg(data);
+            await this.GetAllDishes(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    },
+
+    // 获取商品信息
+    async GetRestaurantInfo(data) {
+        try {
+            const response = await api.GetRestaurantInfo(data);
+            console.log(response);
+            const categories = response.data.data.categories;
+            const products = [];
+
+            categories.forEach(category => {
+                category.dishes.forEach(dish => {
+                    products.push({
+                        id: dish.id,
+                        categoryId: category.id,
+                        name: dish.name,
+                        price: dish.price / 100.00,
+                        image: dish.image,
+                        description: dish.description,
+                        flavors: dish.flavors
                     });
                 });
+            });
 
-                console.log(categories)
-                console.log(products)
+            console.log(categories);
+            console.log(products);
 
-                this.setData({
-                    categories: categories,
-                    products: products,
-                    selectedCategoryId: categories.length > 0 ? categories[0].id : null
-                });
+            this.setData({
+                categories: categories,
+                products: products,
+                selectedCategoryId: categories.length > 0 ? categories[0].id : null
+            });
 
-                this.filterProductsByCategory();
+            this.filterProductsByCategory();
+        } catch (error) {
+            console.error('Error fetching restaurant info:', error);
+        }
+    },
+
+    // 获取商家信息
+    async GetRestaurantMsg(data) {
+        try {
+            const response = await api.GetRestaurantMsg(data);
+            console.log(response);
+            this.setData({
+                storeName: response.data.data.name,
+                storeLocation: response.data.data.address
             })
+            // 处理商家信息的逻辑
+        } catch (error) {
+            console.error('Error fetching restaurant message:', error);
+        }
+    },
+
+    // 获取顶部图片
+    async GetAllDishes(data) {
+        try {
+            const response = await api.GetAllDishes(data.restaurant_id);
+            console.log(response);
+            // 提取菜品图片并添加到 storeImages 数组中
+            let storeImages = [];
+            response.data.data.dishes.forEach(dish => {
+                if (dish.image) {
+                    storeImages.push(dish.image);
+                }
+            });
+            
+            console.log(storeImages)
+            this.setData({
+                storeLogo: storeImages[0],
+                storeImages: storeImages
+            })
+        } catch (error) {
+            console.error('Error fetching dishes message:', error);
+        }
     },
 
     // 选择商品类目
