@@ -87,6 +87,11 @@ module.exports = {
     // 取消订单
     CancelOrder(data) {
         const order_id = data.order_id;
-        return request.post(`customer/order/${order_id}/cancel`)
+        return request.post(`customer/order/${order_id}/cancel`);
+    },
+    // 支付订单
+    PayOrder(data){
+        const order_id = data.order_id;
+        return request.post(`customer/order/${order_id}/pay`);
     }
 }

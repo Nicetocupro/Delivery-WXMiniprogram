@@ -22,6 +22,7 @@ Page({
     },
 
     onLoad(options) {
+        console.log(options)
         // 传入restaurant_id
         this.setData({
             restaurant_id: options.restaurant_id
