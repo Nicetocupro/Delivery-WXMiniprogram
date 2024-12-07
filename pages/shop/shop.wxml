@@ -1,7 +1,7 @@
 <view class="page-container">
     <!-- 店家信息 -->
     <view class="store-info">
-        <image class="store-logo" src="{{storeLogo}}" alt="logo" />
+        <image class="store-logo" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{storeLogo}}/?session_id={{session_id}}" alt="logo" />
         <view class="store-details">
             <text class="store-name">{{storeName}}</text>
             <text class="store-location">{{storeLocation}}</text>
@@ -12,7 +12,7 @@
     <swiper class="store-swiper" autoplay interval="3000" indicator-dots indicator-active-color="#515151" circular>
         <block wx:for="{{storeImages}}" wx:key="index">
             <swiper-item>
-                <image class="swiper-image" src="{{item}}" alt="store image" />
+                <image class="swiper-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{item}}/?session_id={{session_id}}" alt="store image" />
             </swiper-item>
         </block>
     </swiper>

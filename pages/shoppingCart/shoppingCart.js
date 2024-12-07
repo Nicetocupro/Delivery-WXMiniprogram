@@ -4,6 +4,7 @@ Page({
     data: {
         restaurant_id: null,
         session_id: null,
+        order_id: null,
         // 包含每一个菜品的id category name price image flavors description
         products: [],
         // 购物车包含所选菜品的id flavor_id count
@@ -270,7 +271,8 @@ Page({
             .then(res => {
                 console.log(res)
                 this.setData({
-                    showCheckoutPage: true,
+                    order_id: res.data.data.order_id,
+                    showCheckoutPage: true
                 });
                 this.startCountdown();
             })
@@ -279,24 +281,41 @@ Page({
     // 取消订单（待完成）
     cancelCheckout() {
         // 取消订单逻辑
-        /* 这个地方应该将order_id传入，而不是null */
+
         let data = {
-            order_id: null
+            order_id: this.data.order_id
         }
 
         api.CancelOrder(data)
-        .then(res =>{
-            console.log(res);
-            this.stopCountdown();
-            this.setData({
-                showCheckoutPage: false,
-            });
-        })
+            .then(res => {
+                console.log(res);
+                this.stopCountdown();
+                const restaurant_id = this.data.restaurant_id;
+                // 使用 wx.reLaunch 或 wx.redirectTo 重新加载当前页面
+                wx.reLaunch({
+                    url: `/pages/shop/shop?restaurant_id=${restaurant_id}` // 替换为你的页面路径
+                });                
+            })
     },
 
     // 支付订单（待完成）
-    PayOrder(){
+    PayOrder() {
         /** 这个地方模拟订单支付的操作，将订单的状态转变为1 */
+        let data = {
+            order_id: this.data.order_id
+        }
+
+        api.PayOrder(data)
+            .then(res => {
+                console.log(res);
+                this.stopCountdown();
+                const restaurant_id = this.data.restaurant_id;
+                console.log(restaurant_id)
+                // 使用 wx.reLaunch 或 wx.redirectTo 重新加载当前页面
+                wx.reLaunch({
+                    url: `/pages/shop/shop?restaurant_id=${restaurant_id}` // 替换为你的页面路径
+                });     
+            })
     },
 
     // 开始倒计时

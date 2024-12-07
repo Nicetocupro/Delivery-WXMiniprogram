@@ -22,6 +22,12 @@ module.exports = {
         const url = `customer/restaurant/${restaurantId}/categories/dishes`;
         return request.get(url);
     },
+    // 获取商店的商家信息
+    GetRestaurantMsg(data){
+        const restaurantId = data.restaurant_id;
+        const url = `customer/restaurant/${restaurantId}`;
+        return request.get(url);
+    },
     // 获取购物车逻辑
     GetCart(data) {
         const restaurantId = data.restaurant_id;
