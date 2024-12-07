@@ -189,6 +189,7 @@
 
 .review-container {
     padding: 20rpx;
+    margin-bottom: 80px;
 }
 
 .review-list {

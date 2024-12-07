@@ -88,11 +88,12 @@ Page({
             var promises = this.data.images.map(image => {
                 return new Promise((resolve, reject) => {
                     wx.uploadFile({
-                        url: 'https://www.xiaoqingyanxuan.top/api/v1/wx/customer/comment/image',
+                        url: 'https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/comment',
                         filePath: image.path,
                         name: 'image',
                         header: header,
                         success(res) {
+                            console.log(res);
                             const parsedData = JSON.parse(res.data);
                             console.log(parsedData);
                             uploadedImages.push(parsedData.data.image);
@@ -110,37 +111,37 @@ Page({
                 .then(results => {
                     console.log('All uploads completed:', uploadedImages);
                     // 在这里可以进行后续操作
+                    let data = {
+                        content: this.data.reviewText,
+                        images: uploadedImages,
+                        order_id: this.data.order_id,
+                        rating: this.data.stars_score * 2
+                    };
+            
+                    console.log(data);
+            
+                    api.SendComment(this.data.restaurant_id, data)
+                        .then(() => {
+                            wx.showToast({
+                              content: '已上传评论'
+                            });
+                            wx.navigateBack();
+                        })
+                        .catch((error) => {
+                            this.setData({
+                                errorMessage: error.message
+                            });
+                        })
+                        .finally(() => {
+                            this.setData({
+                                isLoading: false
+                            });
+                        });
                 })
                 .catch(error => {
                     console.error('Upload failed:', error);
                 });
         }
 
-        let data = {
-            content: this.data.reviewText,
-            images: uploadedImages,
-            order_id: this.data.order_id,
-            rating: this.data.stars_score
-        };
-
-        console.log(data);
-
-        api.SendComment(this.data.restaurant_id, data)
-            .then(() => {
-                wx.showToast({
-                  content: '已上传评论'
-                });
-                wx.navigateBack();
-            })
-            .catch((error) => {
-                this.setData({
-                    errorMessage: error.message
-                });
-            })
-            .finally(() => {
-                this.setData({
-                    isLoading: false
-                });
-            });
     }
 });

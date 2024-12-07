@@ -41,10 +41,6 @@ module.exports = {
         delete data.restaurant_id;
         return request.post(url, data);
     },
-    // 上传评论图片
-    UploadImage(data) {
-        return request.post(`customer/comment/image`, data);
-    },
     // 上传评论
     SendComment(restaurant_id, data) {
         return request.post(`customer/comment/restaurant/${restaurant_id}`, data);
@@ -59,5 +55,9 @@ module.exports = {
     // 获取图片
     FetchPic(file_path){
         return request.get(`customer/comment/${file_path}`);
+    },
+    // 上传骑手认证
+    Rider_Certificate(data){
+        return request.post(`customer/rider-application`, data);
     }
 }

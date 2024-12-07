@@ -5,6 +5,7 @@ Page({
 
         // 店家信息
         restaurant_id: 1,
+        session_id: null,
         storeLogo: '../../asserts/images/shopTest/logo.jpg', // 示例logo链接
         storeName: '熊大爷水饺',
         storeLocation: '嘉定区安亭镇曹安公路4800号同济大学满天星广场',
@@ -35,6 +36,10 @@ Page({
             restaurant_id : options.restaurant_id
         })
         */
+        this.setData({
+            session_id: wx.getStorageSync('session_id')
+        });
+
         let data = {
             restaurant_id: this.data.restaurant_id
         };
@@ -79,6 +84,7 @@ Page({
 
                 // 处理评论数据
                 const comments = commentsResponse.data.data.comments;
+                console.log(comments);
 
                 // 检查 comments 是否存在且是一个数组
                 if (Array.isArray(comments)) {
@@ -86,7 +92,7 @@ Page({
                         return {
                             id: comment.id,
                             content: comment.content,
-                            rating: comment.rating,
+                            rating: comment.rating * 1.0 / 2,
                             created_at: comment.created_at,
                             updated_at: comment.updated_at,
                             wechat_user: {

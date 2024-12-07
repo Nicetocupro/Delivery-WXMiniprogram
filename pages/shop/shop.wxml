@@ -66,7 +66,7 @@
                     </view>
                     <view class="review-images">
                         <block wx:for="{{item.comment_details}}" wx:key="id">
-                            <image class="review-image" src="{{item.image_path}}" mode="aspectFill" bindtap="previewImage" data-src="{{item.image_path}}"></image>
+                            <image class="review-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/{{item.image_path}}/?session_id={{session_id}}" mode="aspectFill" mode="aspectFit" bindtap="previewImage" data-src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/{{item.image_path}}/?session_id={{session_id}}" ></image>
                         </block>
                     </view>
                     <view class="review-replies">

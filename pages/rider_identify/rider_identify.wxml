@@ -1,0 +1,17 @@
+<!--pages/rider_identify/rider_identify.wxml-->
+<view class="container">
+    <view class="title">跑腿认证</view>
+    <view class="form-item">
+        <view class="label">学生姓名</view>
+        <input type="text" name="student_name" bindinput="NameInput" />
+    </view>
+    <view class="form-item">
+        <view class="label">学号</view>
+        <input type="number" name="student_no" bindinput="NoInput" />
+    </view>
+    <button class="submit-btn" bindtap="chooseImage">上传照片</button>
+    <view class="image-container" wx:if="{{image.length > 0}}">
+        <image class="review-image" src="{{item.thumb}}" mode="aspectFit" wx:for="{{image}}" wx:key="index" />
+    </view>
+    <button form-type="submit" class="submit-btn" bindtap="submit_application">提交</button>
+</view>

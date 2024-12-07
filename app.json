@@ -18,7 +18,8 @@
         "pages/shop/shop",
         "pages/map/map",
         "pages/writeReview/writeReview",
-        "pages/shoppingCart/shoppingCart"
+        "pages/shoppingCart/shoppingCart",
+        "pages/rider_identify/rider_identify"
     ],
     "window": {
         "backgroundTextStyle": "light",
