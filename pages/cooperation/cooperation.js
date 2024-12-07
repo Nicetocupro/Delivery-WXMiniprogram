@@ -46,6 +46,24 @@ Page({
                 var tempFilePaths = res.tempFiles;
                 if (tempFilePaths.length > 0) {
                     var file = tempFilePaths[0];
+                    // 检查图片格式
+                    const validImageTypes = ['jpg', 'jpeg', 'png'];
+                    const fileExtension = file.tempFilePath.split('.').pop().toLowerCase();
+                    if (!validImageTypes.includes(fileExtension)) {
+                        wx.showToast({
+                            title: '图片格式必须是 JPG、JPEG 或 PNG',
+                            icon: 'none'
+                        });
+                        return;
+                    }
+                    // 检查图片大小
+                    if (file.size > 8 * 1024 * 1024) {
+                        wx.showToast({
+                            title: '图片大小不能超过 8MB',
+                            icon: 'none'
+                        });
+                        return;
+                    }
                     wx.getImageInfo({
                         src: file.tempFilePath,
                         success: function (res) {
@@ -124,57 +142,52 @@ Page({
         }
 
         // 上传图片
-        if (image != null) {
-            var uploadimage = image; // 获取第一张图片
-            // 请求头
-            let header = {
-                'Content-Type': 'application/json'
-            }
-            let session_id = wx.getStorageSync('session_id');
+        var uploadimage = image; // 获取第一张图片
+        // 请求头
+        let header = {
+            'Content-Type': 'application/json'
+        }
+        let session_id = wx.getStorageSync('session_id');
 
-            // 本地session存在,则放到header里
-            if (session_id != "" && session_id != null) {
-                header.Authorization = session_id;
-            }
+        // 本地session存在,则放到header里
+        if (session_id != "" && session_id != null) {
+            header.Authorization = session_id;
+        }
 
-            wx.uploadFile({
-                url: 'https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/merchant-license',
-                filePath: uploadimage.path,
-                name: 'image',
-                header: header,
-                success: (res) => {
-                    console.log(res);
-                    try {
-                        const parsedData = JSON.parse(res.data);
-                        console.log(parsedData);
-                        const certificateImage = parsedData.data.image;
-                        this.setData({
-                            imagePath: certificateImage
-                        });
-                        console.log(this.data.imagePath);
+        wx.uploadFile({
+            url: 'https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/merchant-license',
+            filePath: uploadimage.path,
+            name: 'image',
+            header: header,
+            success: (res) => {
+                console.log(res);
+                try {
+                    const parsedData = JSON.parse(res.data);
+                    console.log(parsedData);
+                    const certificateImage = parsedData.data.image;
+                    this.setData({
+                        imagePath: certificateImage
+                    });
+                    console.log(this.data.imagePath);
 
-                        // 图片上传成功后再进行表单提交
-                        this.submitForm();
-                    } catch (error) {
-                        console.error('JSON Parsing Error:', error);
-                        wx.showToast({
-                            title: '图片上传失败',
-                            icon: 'none'
-                        });
-                    }
-                },
-                fail: (err) => {
-                    console.error('Upload Failed:', err);
+                    // 图片上传成功后再进行表单提交
+                    this.submitForm();
+                } catch (error) {
+                    console.error('JSON Parsing Error:', error);
                     wx.showToast({
                         title: '图片上传失败',
                         icon: 'none'
                     });
                 }
-            });
-        } else {
-            // 如果没有图片，直接提交表单
-            this.submitForm();
-        }
+            },
+            fail: (err) => {
+                console.error('Upload Failed:', err);
+                wx.showToast({
+                    title: '图片上传失败',
+                    icon: 'none'
+                });
+            }
+        });
     },
 
     submitForm() {
