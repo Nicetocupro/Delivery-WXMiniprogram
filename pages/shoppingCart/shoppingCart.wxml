@@ -15,11 +15,11 @@
 
                 <view class="quantity-control">
                     <!-- 减少数量按钮 -->
-                    <button class="quantity-btn" bindtap="decreaseQuantity" data-id="{{item.id}}">-</button>
+                    <button class="quantity-btn" bindtap="decreaseQuantity" data-index="{{index}}">-</button>
                     <!-- 当前数量 -->
                     <text class="quantity">{{item.quantity}}</text>
                     <!-- 增加数量按钮 -->
-                    <button class="quantity-btn" bindtap="increaseQuantity" data-id="{{item.id}}">+</button>
+                    <button class="quantity-btn" bindtap="increaseQuantity" data-index="{{index}}">+</button>
                 </view>
             </view>
         </block>
@@ -66,6 +66,23 @@
         </view>
         <view class="cancel-btn">
             <button bindtap="cancelCheckout">取消订单</button>
+        </view>
+    </view>
+
+    <!-- 自定义模态对话框 -->
+    <view class="modal-mask" wx:if="{{showModal}}">
+        <view class="modal-content">
+            <view class="modal-header">
+                <text>添加新地址</text>
+            </view>
+            <view class="modal-body">
+                <text>示例：同济大学 女 陈家庆 xxxxxxxxxxx</text>
+                <input type="text" placeholder="请输入地址信息（格式：地址 性别 姓名 电话号码）" bindinput="onInput" />
+            </view>
+            <view class="modal-footer">
+                <button bindtap="onCancel">取消</button>
+                <button bindtap="onConfirm">确定</button>
+            </view>
         </view>
     </view>
 </view>

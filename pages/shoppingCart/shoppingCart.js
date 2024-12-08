@@ -12,7 +12,10 @@ Page({
         cartItems: [], // 购物车中的菜品
         totalPrice: 0, // 总价格
         totalItems: 0, // 总菜品数量
-        selectedAddress: null
+        selectedAddress: null,
+        showCheckoutPage: false,
+        showModal: false,
+        inputValue: ''
     },
 
     // 初始化逻辑
@@ -172,85 +175,97 @@ Page({
 
     // 添加新地址
     addNewAddress() {
-        wx.showModal({
-            title: '添加新地址',
-            editable: true,
-            placeholderText: '请输入地址信息（格式：地址 性别 姓名 电话号码）',
-            success: (res) => {
-                if (res.confirm) {
-                    const addressInfo = res.content.split(' ');
-                    console.log(addressInfo);
-                    if (addressInfo.length === 4) {
-                        const address = addressInfo[0].trim();
-                        const gender = addressInfo[1].trim();
-                        const name = addressInfo[2].trim();
-                        const phone_number = addressInfo[3].trim();
-
-                        // 验证地址信息
-                        if (address.length > 80) {
-                            wx.showToast({
-                                title: '地址长度不能超过80个字符！',
-                                icon: 'none',
-                            });
-                            return;
-                        }
-                        if (gender !== '男' && gender !== '女') {
-                            wx.showToast({
-                                title: '性别必须是“男”或“女”！',
-                                icon: 'none',
-                            });
-                            return;
-                        }
-                        if (name.length > 20) {
-                            wx.showToast({
-                                title: '姓名长度不能超过20个字符！',
-                                icon: 'none',
-                            });
-                            return;
-                        }
-                        const phoneRegex = /^\d{11}$/;
-                        if (!phoneRegex.test(phone_number)) {
-                            wx.showToast({
-                                title: '电话号码格式不正确，请输入11位数字！',
-                                icon: 'none',
-                            });
-                            return;
-                        }
-
-                        // 转换性别和手机号格式
-                        const genderCode = gender === '男' ? 1 : 2;
-                        const formattedPhoneNumber = `+86${phone_number}`;
-
-                        const newAddress = {
-                            address: address,
-                            gender: genderCode,
-                            name: name,
-                            phone_number: formattedPhoneNumber
-                        };
-
-                        // 同济大学 男 马恒超 15665299259
-                        console.log(newAddress)
-                        api.addAddress(newAddress)
-                            .then(res => {
-                                console.log(res)
-                                wx.showToast({
-                                    title: '地址添加成功！',
-                                    icon: 'success',
-                                });
-                                this.setData({
-                                    selectedAddress: newAddress
-                                });
-                                this.proceedToCheckout();
-                            });
-                    } else {
-                        wx.showToast({
-                            title: '地址信息格式不正确，请重新输入！',
-                            icon: 'none',
-                        });
-                    }
-                }
-            }
+        this.setData({
+            showModal: true
         });
+    },
+
+    // 处理输入框的输入事件
+    onInput(e) {
+        this.setData({
+            inputValue: e.detail.value
+        });
+    },
+
+    // 处理取消按钮的点击事件
+    onCancel() {
+        this.setData({
+            showModal: false
+        });
+    },
+
+    // 处理确定按钮的点击事件
+    onConfirm() {
+        const addressInfo = this.data.inputValue.split(' ');
+        console.log(addressInfo);
+        if (addressInfo.length === 4) {
+            const address = addressInfo[0].trim();
+            const gender = addressInfo[1].trim();
+            const name = addressInfo[2].trim();
+            const phone_number = addressInfo[3].trim();
+
+            // 验证地址信息
+            if (address.length > 80) {
+                wx.showToast({
+                    title: '地址长度不能超过80个字符！',
+                    icon: 'none',
+                });
+                return;
+            }
+            if (gender !== '男' && gender !== '女') {
+                wx.showToast({
+                    title: '性别必须是“男”或“女”！',
+                    icon: 'none',
+                });
+                return;
+            }
+            if (name.length > 20) {
+                wx.showToast({
+                    title: '姓名长度不能超过20个字符！',
+                    icon: 'none',
+                });
+                return;
+            }
+            const phoneRegex = /^\d{11}$/;
+            if (!phoneRegex.test(phone_number)) {
+                wx.showToast({
+                    title: '电话号码格式不正确，请输入11位数字！',
+                    icon: 'none',
+                });
+                return;
+            }
+
+            // 转换性别和手机号格式
+            const genderCode = gender === '男' ? 1 : 2;
+            const formattedPhoneNumber = `+86${phone_number}`;
+
+            const newAddress = {
+                address: address,
+                gender: genderCode,
+                name: name,
+                phone_number: formattedPhoneNumber
+            };
+
+            console.log(newAddress)
+            api.addAddress(newAddress)
+                .then(res => {
+                    console.log(res)
+                    wx.showToast({
+                        title: '地址添加成功！',
+                        icon: 'success',
+                    });
+                    this.setData({
+                        selectedAddress: newAddress,
+                        showModal: false
+                    });
+                    this.proceedToCheckout();
+                });
+        } else {
+            wx.showToast({
+                title: '地址信息格式不正确，请重新输入！',
+                icon: 'none',
+            });
+        }
     },
 
     // 下订单操作
@@ -294,7 +309,7 @@ Page({
                 // 使用 wx.reLaunch 或 wx.redirectTo 重新加载当前页面
                 wx.reLaunch({
                     url: `/pages/shop/shop?restaurant_id=${restaurant_id}` // 替换为你的页面路径
-                });                
+                });
             })
     },
 
@@ -314,7 +329,7 @@ Page({
                 // 使用 wx.reLaunch 或 wx.redirectTo 重新加载当前页面
                 wx.reLaunch({
                     url: `/pages/shop/shop?restaurant_id=${restaurant_id}` // 替换为你的页面路径
-                });     
+                });
             })
     },
 
