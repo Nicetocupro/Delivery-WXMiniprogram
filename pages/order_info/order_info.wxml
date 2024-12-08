@@ -36,7 +36,7 @@
             <view class="order-details-item" wx:for="{{orderInfo.details}}" wx:key="index">
                 <view class="dish-name">{{item.dish_name}}</view>
                 <view class="dish-count">x{{item.dish_count}}</view>
-                <view class="dish-price">￥{{item.DishPrice}}</view>
+                <view class="dish-price">￥{{item.DishPrice / 100}}</view>
                 <view class="dish-flavor">{{item.flavor_name}}</view>
             </view>
         </view>
