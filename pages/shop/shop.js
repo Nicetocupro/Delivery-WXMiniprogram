@@ -59,7 +59,7 @@ Page({
                             id: dish.id,
                             categoryId: category.id,
                             name: dish.name,
-                            price: dish.price,
+                            price: dish.price / 100.00,
                             image: dish.image,
                             description: dish.description,
                             flavors: dish.flavors
