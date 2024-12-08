@@ -1,7 +1,8 @@
 <view class="container">
   <!-- 用户头像和昵称 -->
   <view class="header" bindtap="modifyInformation">
-    <image class="profile-pic" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/{{userInfo.avatarUrl}}/?session_id={{session_id}}" mode="aspectFill" />
+    <image class="profile-pic" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/{{userInfo.avatarUrl}}/?session_id={{session_id}}" mode="aspectFill" wx:if="{{userInfo.avatarUrl}}"/>
+    <image class="profile-pic" src="defaultAvatarUrl" mode="aspectFill" wx:else/>
     <view class="set-profile">{{userInfo.nickName || '游客'}}</view>
   </view>
 

@@ -11,6 +11,7 @@ Page({
         errorMessage: '', // 错误信息
         image: null,
         imagePath: '',
+        AvatarUrl: defaultAvatarUrl,
         session_id: null,
     },
 
@@ -64,7 +65,7 @@ Page({
                                     path: file.tempFilePath,
                                     thumb: res.path // 缩略图路径
                                 },
-                                imagePath: file.tempFilePath // 更新 imagePath 以显示选择的图片
+                                AvatarUrl: file.tempFilePath // 更新 imagePath 以显示选择的图片
                             });
                         },
                         fail: function (error) {
@@ -173,6 +174,14 @@ Page({
                 app.globalData.userInfo.avatarUrl = this.data.imagePath;
                 app.globalData.userInfo.nickName = this.data.nickName;
                 app.globalData.userInfo.phoneNumber = `+86${this.data.phoneNumber}`;
+                
+                // 通知上一个页面刷新
+                const pages = getCurrentPages();
+                if (pages.length > 1) {
+                    const prevPage = pages[pages.length - 2];
+                    prevPage.onRefresh();
+                }
+
                 wx.navigateBack(); // 返回上一个页面
             })
             .catch((error) => {
