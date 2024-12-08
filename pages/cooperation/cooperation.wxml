@@ -21,7 +21,7 @@
         <view class="form-group">
             <label>上传证书（必填）</label>
             <button bindtap="chooseImage">选择照片</button>
-            <image src="{{filePath}}" mode="aspectFit" style="width: 100%; height: 200px;" wx:if="{{filePath}}"></image>
+            <image src="{{imagePath}}" mode="aspectFit" style="width: 100%; height: 200px;" wx:if="{{imagePath}}"></image>
         </view>
 
         <button bindtap="submitCooperation">提交</button>
