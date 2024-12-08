@@ -2,8 +2,9 @@
     <form bindsubmit="onSubmit">
         <view class="form-item">
             <text>头像：</text>
-            <button class="avatar-wrapper" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
-                <image class="avatar" src="{{avatarUrl}}"></image>
+            <button class="avatar-wrapper" bindtap="chooseImage">
+                <image class="avatar" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/image/{{imagePath}}/?session_id={{session_id}}" wx:if="{{imagePath}}"></image>
+                <image class="avatar" src="{{defaultAvatarUrl}}" wx:else></image>
             </button>
         </view>
         <view class="form-item">

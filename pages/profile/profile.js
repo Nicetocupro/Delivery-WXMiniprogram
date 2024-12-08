@@ -6,8 +6,9 @@ Component({
     properties: {
         userInfo: {
             type: Object,
+            session_id: null,
             value: {
-                avatarUrl: app.globalData.userInfo.avatarUrl || defaultAvatarUrl,
+                avatarUrl: app.globalData.userInfo.avatarUrl,
                 nickName: app.globalData.userInfo.nickName,
             }
         }
@@ -17,6 +18,7 @@ Component({
     // 组件生命周期函数，在组件实例进入页面节点树时调用
     attached: function () {
         this.setData({
+            session_id: wx.getStorageSync('session_id'),
             avatarUrl: app.globalData.userInfo.avatarUrl || defaultAvatarUrl,
             nickName: app.globalData.userInfo.nickName,
         })
