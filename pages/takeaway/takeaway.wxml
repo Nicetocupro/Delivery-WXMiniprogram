@@ -13,19 +13,19 @@
 
     <view class="category-menu">
         <!-- 每个分类对应的英文文件名 -->
-        <view class="category-item" bindtap="filterShops" data-category="营养早餐">
+        <view class="category-item"  data-category="营养早餐">
             <image class="category-image" src="/asserts/images/takeaway/breakfast.png" />
             <text>营养早餐</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="经典美食">
+        <view class="category-item" data-category="经典美食">
             <image class="category-image" src="/asserts/images/takeaway/classic.png" />
             <text>经典美食</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="烧烤串">
+        <view class="category-item" data-category="烧烤串">
             <image class="category-image" src="/asserts/images/takeaway/bbq.png" />
             <text>烧烤串</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="甜点饮品">
+        <view class="category-item" data-category="甜点饮品">
             <image class="category-image" src="/asserts/images/takeaway/dessert.png" />
             <text>甜点饮品</text>
         </view>
