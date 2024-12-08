@@ -304,12 +304,6 @@ Page({
         });
     },
 
-    writeReview: function () {
-        wx.navigateTo({
-            url: '/pages/writeReview/writeReview'
-        });
-    },
-
     formatTime(timestamp) {
         const date = new Date(timestamp * 1000);
         const year = date.getFullYear();

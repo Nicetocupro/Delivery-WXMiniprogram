@@ -138,6 +138,26 @@ Component({
                 url: `/pages/order_info/order_info?id=${id}`
             });
         },
+        // 去写评论页面
+        goto_writeReview: function (e) {
+            const index = e.currentTarget.dataset.index;
+            const order_id = this.data.filteredOrders[index].id;
+            const restaurant_id = this.data.filteredOrders[index].restaurant_id;
+
+            if(this.data.filteredOrders[index].status != 4)
+            {
+                wx.showToast({
+                  title: '当前订单未完成不可评论',
+                });
+            }
+            else
+            {
+                console.log("即将跳转评论页");
+                wx.navigateTo({
+                    url: `/pages/writeReview/writeReview?order_id=${order_id}&restaurant_id=${restaurant_id}`
+                });
+            }
+        },
         // 格式化时间戳为年月日时分秒
         formatTimestamp: function (timestamp) {
             const date = new Date(timestamp * 1000); // Unix 时间戳需要乘以 1000

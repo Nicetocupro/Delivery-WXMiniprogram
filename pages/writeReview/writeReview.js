@@ -143,5 +143,16 @@ Page({
                 });
         }
 
+    },
+    onLoad(options){
+        const { order_id, restaurant_id } = options;
+
+        this.setData({
+            restaurant_id: restaurant_id,
+            order_id: order_id
+        });
+
+        console.log(this.data.restaurant_id);
+        console.log(this.data.order_id);
     }
 });

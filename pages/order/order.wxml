@@ -33,6 +33,9 @@
                 <view class="page_row">
                     <button class="btn" data-index="{{index}}" bindtap="goto_order">查看详情</button>
                 </view>
+                <view class="page-row">
+                    <button class="btn" data-index="{{index}}" bindtap="goto_writeReview">评论该订单</button>
+                </view>
                 <view class="division2"></view>
             </view>
         </block>

@@ -97,13 +97,6 @@ Page({
                         });
                         console.log(this.data.certificate_image);
 
-                        if (this.data.student_name < 2 || this.data.student_name > 20) {
-                            console.log("来了");
-                            wx.showToast({
-                                content: '姓名不符合规范'
-                            });
-                        }
-
                         let data = {
                             student_name: this.data.student_name,
                             student_no: this.data.student_no,
