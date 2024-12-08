@@ -1,4 +1,8 @@
+// 引入统一管理的接口js
+const api = require("../../request/api");
+
 var app = getApp();
+
 Page({
     /**
      * 页面的初始数据
@@ -7,10 +11,10 @@ Page({
         userInfo: {
             phoneNumber: null
         },
-        InputCode: null,
-        TrueCode: null,
+        inputCode: null,
+        correctVerificationCode: null,
         btnText: '获取验证码', // 按钮的文本内容
-        BtnisDisabled: false, // 按钮是否禁用的状态
+        btnIsDisabled: false, // 按钮是否禁用的状态
         countdown: 60, // 倒计时时间，单位为秒
         timer: null, // 保存倒计时的定时器
         isChecked: false, // 控制复选框是否打勾
@@ -19,46 +23,67 @@ Page({
 
     // 进行手机号的数据绑定
     phoneNumberInput: function (e) {
-        console.log(e)
         this.setData({
             "userInfo.phoneNumber": e.detail.value
-        })
-        console.log(this.data.userInfo.phoneNumber)
+        });
     },
 
     // 进行验证码的数据绑定
-    CodeInput: function (e) {
-        console.log(e)
+    codeInput: function (e) {
         this.setData({
-            InputCode: e.detail.value
-        })
-        console.log(this.data.InputCode)
+            inputCode: e.detail.value
+        });
+    },
+
+    // 发送验证码函数，封装发送验证码的具体业务逻辑，返回一个Promise以便处理成功或失败情况
+    sendVerificationCode: function (phoneNumber) {
+        return new Promise((resolve, reject) => {
+            // 这里应该调用真正的发送验证码接口，比如通过网络请求等方式
+            // 假设调用某个发送短信的函数sendCode(phoneNumber)，并根据其返回结果处理Promise状态
+            // 示例中简单模拟返回成功或失败情况
+            const isSuccess = this.validatePhoneNumber(phoneNumber); // 先简单验证手机号格式（实际需完善验证逻辑）
+            if (isSuccess) {
+                // 实际应用中这里调用接口发送验证码
+                resolve();
+            } else {
+                reject(new Error('手机号格式不正确'));
+            }
+        });
+    },
+
+    // 验证手机号格式的简单函数（实际应用中可完善更严格的验证规则）
+    validatePhoneNumber: function (phoneNumber) {
+        // 简单正则验证示例，实际需更严谨判断
+        const phoneReg = /^1[3-9]\d{9}$/;
+        return phoneReg.test(phoneNumber);
     },
 
     // getCodeBtn根据手机号获取验证码
     getCodeBtn: function () {
+        if (this.data.btnIsDisabled) return;
 
-        if (this.data.isDisabled) return;
+        const phoneNumber = this.data.userInfo.phoneNumber;
+        this.sendVerificationCode(phoneNumber)
+            .then(() => {
+                // 在这里将手机号进行存储，防止手机号变更。
+                app.globalData.userInfo.phoneNumber = phoneNumber;
 
-        /**
-         * 这里应该有一个函数根据电话号码获取验证码，并无返回值
-         * sendCode(this.data.userInfo.phoneNumber)
-         * 如果按钮处于禁用状态，不再处理点击事件
-         * sendCode同样要返回是否能正确发送给该手机号短信
-         * 返回一个真实的TrueCode
-         * */
+                wx.showToast({
+                    title: '验证码已发送',
+                    icon: 'success',
+                    duration: 2000,
+                });
 
-        // 在这里将手{机号进行存储，防止手机号变更。
-        app.globalData.userInfo.phoneNumber = this.data.userInfo.phoneNumber;
-
-        wx.showToast({
-            title: '验证码已发送',
-            icon: 'success',
-            duration: 2000,
-        });
-
-        // 开始倒计时
-        this.startCountdown();
+                // 开始倒计时
+                this.startCountdown();
+            })
+            .catch((err) => {
+                wx.showToast({
+                    title: err.message,
+                    icon: 'error',
+                    duration: 2000,
+                });
+            });
     },
 
     // 倒计时函数
@@ -67,7 +92,7 @@ Page({
 
         // 设置按钮为禁用状态，并且更新文本
         this.setData({
-            BtnisDisabled: true,
+            btnIsDisabled: true,
             btnText: `重新发送(${countdown}s)`,
         });
 
@@ -80,7 +105,7 @@ Page({
                 clearInterval(this.data.timer);
                 this.setData({
                     btnText: '获取验证码',
-                    BtnisDisabled: false,
+                    btnIsDisabled: false,
                 });
             } else {
                 // 继续倒计时，更新按钮文本
@@ -91,15 +116,28 @@ Page({
         }, 1000);
     },
 
+    // 验证验证码的函数，提取出来使登录逻辑更清晰
+    verifyCode: function () {
+        const inputCode = this.data.inputCode;
+        const correctCode = this.data.correctVerificationCode;
+        if (!inputCode || inputCode === '') {
+            return false;
+        }
+        return inputCode === correctCode;
+    },
+
     // 登录函数
-    LogIn: function () {
-        if (this.data.isChecked == false) {
+    logIn: function () {
+        if (this.data.isChecked === false) {
             wx.showToast({
                 title: '请同意使用协议',
                 icon: 'error',
                 duration: 2000
             });
-        } else if (this.data.InputCode !== null && this.data.InputCode == this.data.TrueCode && this.data.BtnisDisabled) {
+            return;
+        }
+
+        if (this.verifyCode()) {
             // 如果验证码正确，提示登录成功
             wx.showToast({
                 title: '登录成功',
@@ -119,18 +157,17 @@ Page({
                 icon: 'error',
                 duration: 2000
             });
-
         }
     },
 
     // 该函数用于检测复选框是否勾上，如果勾上就可以叉掉，如果没有，则先弹窗协议。
-    CheckBoxChange: function (e) {
+    checkBoxChange: function (e) {
         if (this.data.isChecked) {
             this.setData({
                 isChecked: false
-            })
+            });
         } else {
-            this.showAgreement()
+            this.showAgreement();
         }
     },
 
@@ -149,61 +186,91 @@ Page({
                 if (res.cancel) {
                     this.setData({
                         isChecked: false
-                    })
+                    });
                 }
 
                 if (res.confirm) {
                     this.setData({
                         isChecked: true
-                    })
+                    });
                 }
             }
-        })
+        });
     },
 
     // 微信快捷登陆
-    WeiXinLogIn: function () {
+    weixin: function () {
         this.setData({
             showModal: true
-        })
+        });
     },
 
     // 当点击遮罩层的时候，弹窗应该消失
-    BindModalMask: function () {
+    bindModalMask: function () {
         if (this.data.showModal) {
             this.setData({
                 showModal: false
-            })
+            });
         }
     },
 
-    /**微信快捷登录，暂未实现，等后端 */
-    getPhoneNumber: function (e) {
-        console.log("getPhoneNumber")
-        console.log(e.detail.errMsg)
-        console.log(e.detail.iv)
-        console.log(e.detail.encryptedData)
-        if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-            wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: '未授权',
-                success: function (res) {}
-            })
-        } else {
-            wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: '同意授权',
-                success: function (res) {}
-            })
-
-            // 转到目前的个人信息页面
-            wx.navigateTo({
-              url:  '/pages/index/index',
-            })
+    // 微信快捷登录，优化使用async/await语法（需小程序环境支持）
+    async wxLogin() {
+        try {
+            const res = await wx.login();
+            if (res.code) {
+                await this.loginWithCode(res.code);
+            } else {
+                console.error('登录失败！' + res.errMsg);
+                wx.showToast({
+                    title: '登录失败，无法获取登录code',
+                    icon: 'none',
+                });
+            }
+        } catch (error) {
+            console.error('微信登录出现异常', error);
+            wx.showToast({
+                title: '微信登录异常，请重试',
+                icon: 'none',
+            });
         }
+    },
 
+    loginWithCode(code) {
+        const data = {
+            code: code
+        };
+        return api.login(data)
+            .then(res => {
+                console.log('登录成功');
+                console.log(res.data.data.info);
+                if (res.data.data.info != undefined) {
+                    app.globalData.userInfo.nickName = res.data.data.info.nickname;
+                    app.globalData.userInfo.phoneNumber = res.data.data.info.phone_number;
+                    if (res.data.data.info.profile_image_url != "") {
+                        app.globalData.userInfo.avatarUrl = res.data.data.info.profile_image_url;
+                    }
+                }
+                console.log(app.globalData);
+                wx.setStorageSync('session_id', res.data.data.session_id);
+                // 处理登录成功后的逻辑
+                wx.navigateTo({
+                    url: '/pages/index/index',
+                    success: function (res) {
+                        console.log('index 跳转成功');
+                    },
+                    fail: function (err) {
+                        console.error('index 跳转失败', err);
+                    }
+                });
+            })
+            .catch(err => {
+                console.error('登录失败', err);
+                wx.showToast({
+                    title: '登录失败，公共区域暂时不提供服务',
+                    icon: 'none',
+                });
+            });
     },
 
     /**

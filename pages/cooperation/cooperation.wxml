@@ -1,52 +1,29 @@
 <view class="container">
-  <view class="intro">校园外卖购，是服务于高校综合体的一站式外卖订餐平台，从点餐、配送、交付、售后服务全环节，为校园群体提供安全、优质、便捷的用餐体验。外卖购全力构建校园安全订餐服务，构建高校食品安全健康围栏，致力于打造健康完善的高校餐饮生态链。</view>
+    <view class="intro">校园外卖购，是服务于高校综合体的一站式外卖订餐平台，从点餐、配送、交付、售后服务全环节，为校园群体提供安全、优质、便捷的用餐体验。外卖购全力构建校园安全订餐服务，构建高校食品安全健康围栏，致力于打造健康完善的高校餐饮生态链。</view>
 
-  <view class="form">
-    <view class="form-group">
-      <label>姓名（必填）</label>
-      <input 
-        type="text" 
-        bindinput="onInputName" 
-        class="input-field" 
-        value="{{name}}"
-      />
-    </view>
-    <view class="form-group">
-      <label>联系方式（必填）</label>
-      <input 
-        type="text" 
-        bindinput="onInputPhone" 
-        class="input-field" 
-        value="{{phone}}"
-      />
-    </view>
-    <view class="form-group">
-      <label>期望合作区域（必填）</label>
-      <input 
-        type="text" 
-        bindinput="onInputRegion" 
-        class="input-field" 
-        value="{{region}}"
-      />
-    </view>
-    <view class="form-group">
-      <label>单位名称</label>
-      <input 
-        type="text" 
-        bindinput="onInputCompany" 
-        class="input-field" 
-        value="{{company}}"
-      />
-    </view>
-    <view class="form-group">
-      <label>合作意向</label>
-      <textarea 
-        bindinput="onInputIntent" 
-        class="input-field"
-        value="{{intent}}"
-      ></textarea>
-    </view>
+    <view class="form">
+        <view class="form-group">
+            <label>姓名（必填）</label>
+            <input type="text" bindinput="onInputName" class="input-field" value="{{name}}" />
+        </view>
+        <view class="form-group">
+            <label>联系方式（必填）</label>
+            <input type="text" bindinput="onInputPhone" class="input-field" value="{{phone}}" />
+        </view>
+        <view class="form-group">
+            <label>邮箱（必填）</label>
+            <input type="text" bindinput="onInputEmail" class="input-field" value="{{email}}" />
+        </view>
+        <view class="form-group">
+            <label>商店描述（必填）</label>
+            <textarea bindinput="onInputDescription" class="input-field" value="{{description}}"></textarea>
+        </view>
+        <view class="form-group">
+            <label>上传证书（必填）</label>
+            <button bindtap="chooseImage">选择照片</button>
+            <image src="{{imagePath}}" mode="aspectFit" style="width: 100%; height: 200px;" wx:if="{{imagePath}}"></image>
+        </view>
 
-    <button bindtap="submitCooperation">提交</button>
-  </view>
+        <button bindtap="submitCooperation">提交</button>
+    </view>
 </view>

@@ -1,0 +1,12 @@
+<view class="map-container">
+   <map class="gaode-map" id="map" markers="{{markers}}" longitude="{{longitude}}" polyline="{{polyline}}" latitude="{{latitude}}" scale="14"></map>
+     <!-- 路程信息 -->
+  <view class="route-info">
+    <view class="distance">
+      <text>路程: {{distance}} 米</text>
+    </view>
+    <view class="duration">
+      <text>预计时间: {{cost}} 分钟</text>
+    </view>
+  </view>
+</view>

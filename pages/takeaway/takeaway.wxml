@@ -1,20 +1,31 @@
 <view class="page">
-    <!-- 分类菜单 -->
+    <image class="navigator-icon" src="/asserts/images/takeaway/navigator.png" bindtap="navigator"></image>
+    <button class="navigator-button" size="mini" bindtap="navigator"> 开始导航 </button>
+
+    <view class="search-box-container">
+      <input 
+        class="search-box" 
+        placeholder="搜索店铺" 
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+      />
+    </view>
+
     <view class="category-menu">
         <!-- 每个分类对应的英文文件名 -->
-        <view class="category-item" bindtap="filterShops" data-category="营养早餐">
+        <view class="category-item"  data-category="营养早餐">
             <image class="category-image" src="/asserts/images/takeaway/breakfast.png" />
             <text>营养早餐</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="经典美食">
+        <view class="category-item" data-category="经典美食">
             <image class="category-image" src="/asserts/images/takeaway/classic.png" />
             <text>经典美食</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="烧烤串">
+        <view class="category-item" data-category="烧烤串">
             <image class="category-image" src="/asserts/images/takeaway/bbq.png" />
             <text>烧烤串</text>
         </view>
-        <view class="category-item" bindtap="filterShops" data-category="甜点饮品">
+        <view class="category-item" data-category="甜点饮品">
             <image class="category-image" src="/asserts/images/takeaway/dessert.png" />
             <text>甜点饮品</text>
         </view>
@@ -27,30 +38,25 @@
         <text class="filter-item" bindtap="sortShops" data-sort="口碑最好">口碑最好</text>
     </view>
 
+    <!-- <text bindtap="output">输出</text> -->
+
     <!-- 商家列表 -->
-    <view class="shop-list">
-        <block wx:for="{{filteredShops}}" wx:key="name">
+    <view class="shop-list" >
+        <block wx:for="{{filteredShops}}" wx:key="id">
             <view class="shop-container">
                 <view class="shop-item">
-                    <image class="shop-logo" src="{{item.logo}}" />
                     <view class="shop-info">
-                        <text class="shop-name">{{item.name}}</text>
+                        <navigator url="/pages/shop/shop?restaurant_id={{item.id}}" class="shop-name">{{item.restaurant_name}}</navigator>
                         <text class="shop-description">{{item.description}}</text>
-                        <view class="shop-stats">
-                            <text>月售 {{item.monthlySales}}</text>
-                            <text>配送费 ￥{{item.deliveryFee}}</text>
-                        </view>
-                        <view class="shop-tags">
-                            <text wx:for="{{item.tags}}" wx:key="tag" class="shop-tag">{{tag}}</text>
-                        </view>
                     </view>
                     <text class="shop-rating">{{item.rating}} 分</text>
                 </view>
+                <text class="shop-description">最小配送金额：{{item.minimum_delivery_amount}}元\n地址：{{item.address}}</text>
 
                 <view class="product-list">
-                    <block wx:for="{{item.products}}" wx:key="productName">
+                    <block wx:for="{{item.products}}" wx:key="id">
                         <view class="product-item">
-                            <image class="product-image" src="{{item.image}}" />
+                            <image class="product-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{item.image}}/?session_id={{session_id}}"/>
                             <view class="product-info">
                                 <text class="product-name">{{item.name}}</text>
                                 <text class="product-price">￥{{item.price}}</text>
@@ -61,5 +67,7 @@
             </view>
         </block>
     </view>
-    <navigator url="/pages/map/map" >开始导航</navigator>
+
+    <text>\n\n\n</text>
+
 </view>

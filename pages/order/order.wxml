@@ -1,39 +1,43 @@
 <view class="order_page">
-  <!-- 顶部分类导航栏 -->
-  <view class="status_nav">
-    <block wx:for="{{statusTabs}}" wx:key="id">
-      <view 
-        class="status_tab" 
-        data-status="{{item.status}}" 
-        bindtap="filterOrdersByStatus"
-        style="background-color: {{activeStatus === item.status ? '#7bbfea' : '#fff'}}; color: {{activeStatus === item.status ? '#fff' : '#7bbfea'}};">
-        {{item.label}}
-      </view>
-    </block>
-  </view>
+    <!-- 顶部分类导航栏 -->
+    <view class="status_nav">
+        <block wx:for="{{statusTabs}}" wx:key="id">
+            <view class="status_tab" data-status="{{item.status}}" bindtap="filterOrdersByStatus" style="background-color: {{activeStatus === item.status ? '#7bbfea' : '#fff'}}; color: {{activeStatus === item.status ? '#fff' : '#7bbfea'}};">
+                {{item.label}}
+            </view>
+        </block>
+    </view>
 
-  <!-- 订单列表 -->
-  <view class="order_list">
-    <block wx:for="{{filteredOrders}}" wx:key="index">
-      <view class="order_container">
-        <view class="money">
-          {{item.statusText}}
-          <text>{{item.date}}</text>
-        </view>
-        <image class="order_image" src="{{item.statusImage}}"></image>
-        <view class="detail">
-          <text class="label_text">订单号</text> {{item.oid}}
-        </view>
-        <view class="detail amount_detail">
-          <text class="label_text">金额</text>
-          <text class="amount_text">￥{{item.price}}</text>
-        </view>
-        <view class="division"></view>
-        <view class="page_row">
-          <button class="btn" data-index="{{index}}" bindtap="goto_order">查看详情</button>
-        </view>
-        <view class="division2"></view>
-      </view>
-    </block>
-  </view>
+    <!-- 订单列表 -->
+    <view class="order_list">
+        <block wx:for="{{filteredOrders}}" wx:key="index">
+            <view class="order_container">
+                <view class="money">
+                    {{item.statusText}}
+                    <text>{{item.formattedCreatedAt}}</text>
+                </view>
+                <image class="order_image" src="{{item.statusImage}}"></image>
+                <view class="detail">
+                    <text class="label_text">订单号</text> {{item.order_number}}
+                </view>
+                <view class="detail">
+                    <text class="label_text">客户名称</text> {{item.customer_name}}
+                </view>
+                <view class="detail">
+                    <text class="label_text">地址</text> {{item.address}}
+                </view>
+                <view class="detail">
+                    <text class="label_text">电话号码</text> {{item.phone_number}}
+                </view>
+                <view class="division"></view>
+                <view class="page_row">
+                    <button class="btn" data-index="{{index}}" bindtap="goto_order">查看详情</button>
+                </view>
+                <view class="page-row">
+                    <button class="btn" data-index="{{index}}" bindtap="goto_writeReview">评论该订单</button>
+                </view>
+                <view class="division2"></view>
+            </view>
+        </block>
+    </view>
 </view>

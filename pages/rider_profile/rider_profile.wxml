@@ -1,0 +1,38 @@
+<!--pages/rider_profile/rider_profile.wxml-->
+<view class="container">
+    <!-- 用户头像和昵称 -->
+    <view class="header">
+        <image class="profile-pic" src="{{userInfo.avatarUrl}}"         mode="aspectFill" />
+        <view class="set-profile">{{userInfo.nickName || '游客'}}</view>
+    </view>
+
+    <!-- 骑手状态栏 -->
+    <view class="stats-container">
+        <view class="stat-item">
+            <text class="stat-label">配送里程</text>
+            <text class="stat-value">12,365公里</text>
+        </view>
+        <view class="divider"></view>
+        <view class="stat-item">
+            <text class="stat-label">订单总数</text>
+            <text class="stat-value">1,243单</text>
+        </view>
+        <view class="divider"></view>
+        <view class="stat-item">
+            <text class="stat-label">已赚钱数</text>
+            <text class="stat-value">3,000元</text>
+        </view>
+    </view>
+    <view class="menu-container">
+        <block wx:for="{{menuItems}}" wx:key="title">
+            <view class="menu-item">
+            <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
+            <text class="menu-title">{{item.title}}</text>
+            <text class="menu-version" wx:if="{{item.version}}">{{item.version}}</text>
+            </view>
+        </block>
+    </view>
+    <view class="logout-container">
+        <button class="logout-button" bindtap="Logout">退出登录</button>
+    </view>
+</view>

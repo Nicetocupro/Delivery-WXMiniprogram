@@ -1,3 +1,5 @@
+const api = require("../../request/api");
+
 Component({
     properties: {
         activeStatus: {
@@ -6,50 +8,30 @@ Component({
         },
         order_data: {
             type: Array,
-            value: [{
-                    oid: 1,
-                    accept: 3,
-                    price: 20,
-                    date: '2020-06-27 16:42'
-                },
-                {
-                    oid: 2,
-                    accept: 2,
-                    price: 30,
-                    date: '2020-06-27 17:20'
-                },
-                {
-                    oid: 3,
-                    accept: 1,
-                    price: 25,
-                    date: '2020-06-28 18:45'
-                },
-                {
-                    oid: 4,
-                    accept: 0,
-                    price: 15,
-                    date: '2020-06-29 19:30'
-                },
-            ]
+            value: []
         }
     },
 
     data: {
         statusTabs: [{
+                status: 0,
+                label: "未支付"
+            },
+            {
+                status: 1,
+                label: "已支付"
+            },
+            {
+                status: 2,
+                label: "等待配送"
+            },
+            {
                 status: 3,
                 label: "已完成"
             },
             {
-                status: 2,
-                label: "配送中"
-            },
-            {
-                status: 1,
-                label: "待接单"
-            },
-            {
-                status: 0,
-                label: "制作中"
+                status: 4,
+                label: "已取消"
             }
         ],
         filteredOrders: []
@@ -62,29 +44,53 @@ Component({
     },
 
     attached: function () {
-        this.filterOrders(this.data.activeStatus);
+        this.fetchOrders(); // 初始化时从后端获取订单数据
     },
 
     methods: {
+        // 从后端获取订单数据
+        fetchOrders: function () {
+            api.GetUserOrders()
+                .then(res => {
+                    console.log(res);
+                    this.setData({
+                        order_data: res.data.data.orders
+                    });
+                    this.filterOrders(this.data.activeStatus); // 获取数据后重新筛选订单
+                })
+        },
+
         // 切换订单分类并筛选数据
         filterOrders: function (status) {
             const statusMap = {
+                0: {
+                    text: "未支付",
+                    image: "/asserts/images/order/unpaid.png"
+                },
+                1: {
+                    text: "已支付",
+                    image: "/asserts/images/order/paid.png"
+                },
+                2: {
+                    text: "等待配送",
+                    image: "/asserts/images/order/waiting.png"
+                },
                 3: {
                     text: "已完成",
                     image: "/asserts/images/order/finish.png"
                 },
-                2: {
-                    text: "配送中",
-                    image: "/asserts/images/order/d2.png"
-                },
-                1: {
-                    text: "待接单",
-                    image: "/asserts/images/order/d1.png"
-                },
-                0: {
-                    text: "制作中",
-                    image: "/asserts/images/order/d0.png"
+                4: {
+                    text: "已取消",
+                    image: "/asserts/images/order/cancel.png"
                 }
+            };
+
+            const orderStatusMap = {
+                0: 0,
+                1: 1,
+                2: 2,
+                3: 4,
+                4: 5
             };
 
             console.log('status:', status); // 打印当前的状态值
@@ -92,13 +98,18 @@ Component({
 
             const filteredOrders = this.data.order_data
                 .filter(order => {
-                    console.log('order.accept:', order.accept, 'status:', status); // 打印每个订单的 accept 和筛选条件
-                    return order.accept === status;
+                    console.log('order.status:', order.status, 'status:', status); // 打印每个订单的 accept 和筛选条件
+                    if (status == 2) {
+                        return order.status === 2 || order.status === 3
+                    } else {
+                        return order.status === orderStatusMap[status];
+                    }
                 })
                 .map(order => ({
                     ...order,
                     statusText: statusMap[status].text,
-                    statusImage: statusMap[status].image
+                    statusImage: statusMap[status].image,
+                    formattedCreatedAt: this.formatTimestamp(order.created_at) // 格式化时间戳
                 }));
 
             console.log('filteredOrders:', filteredOrders); // 打印筛选后的结果
@@ -122,10 +133,42 @@ Component({
         // 查看订单详情
         goto_order: function (e) {
             const index = e.currentTarget.dataset.index;
-            const oid = this.data.filteredOrders[index].oid;
+            const data = JSON.stringify(this.data.filteredOrders[index]);
             wx.navigateTo({
-                url: `/pages/order_info/order_info?oid=${oid}`
+                url: `/pages/order_info/order_info?data=${data}`
             });
+        },
+        // 去写评论页面
+        goto_writeReview: function (e) {
+            const index = e.currentTarget.dataset.index;
+            const order_id = this.data.filteredOrders[index].id;
+            const restaurant_id = this.data.filteredOrders[index].restaurant_id;
+
+            if(this.data.filteredOrders[index].status != 4)
+            {
+                wx.showToast({
+                  title: '当前订单未完成',
+                  icon: 'error'
+                });
+            }
+            else
+            {
+                console.log("即将跳转评论页");
+                wx.navigateTo({
+                    url: `/pages/writeReview/writeReview?order_id=${order_id}&restaurant_id=${restaurant_id}`
+                });
+            }
+        },
+        // 格式化时间戳为年月日时分秒
+        formatTimestamp: function (timestamp) {
+            const date = new Date(timestamp * 1000); // Unix 时间戳需要乘以 1000
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
     }
 });

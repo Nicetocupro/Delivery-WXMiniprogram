@@ -10,22 +10,54 @@ var app = getApp();
 //  引入vant插件，用于提示错误
 import Toast from '@vant/weapp/toast/toast';
 const request = function (url, options) {
+    // 请求头
+    let header = {
+        'Content-Type': 'application/json'
+    }
+    let session_id = wx.getStorageSync('session_id');
+
+    // 本地session存在,则放到header里
+    if (session_id != "" && session_id != null) {
+        header.Authorization = session_id;
+    }
+
     return new Promise((resolve, reject) => {
         wx.request({
             url: app.globalData.baseUrl + url,
             method: options.method,
             data: options.method == "GET" ? options.data : JSON.stringify(options.data),
-            /* 目前没法用header
-            header:{
-                'Authorization':'Bearer '+app.globalData.token
-            },
-            */
+            header: header,
             success: (res) => {
-                if (res.data.code == 500) {
-                    Toast(res.data.msg);
+                if (res.statusCode == 200) {
+                    if (res.data.ecode == 200) {
+                        resolve(res);
+                    } else if (res.data.ecode == 9000) {
+                        Toast("登陆超时");
+                        //删除缓存  重新登录 获取会话
+                        wx.removeStorageSync('sessionid');
+
+                        wx.navigateTo({
+                            url: '/pages/register/register',
+                            success: function (res) {
+                                console.log('register 跳转成功');
+                            },
+                            fail: function (err) {
+                                console.error('register 跳转失败', err);
+                            }
+                        })
+                    } else {
+                        Toast(res.data.msg);
+                        reject(res.data.msg);
+                    }
+                } 
+                else if(res.statusCode == 403)
+                {
+                    Toast("公共区域不提供服务");
                     reject(res.data.msg)
-                } else {
-                    resolve(res)
+                }
+                else {
+                    Toast(res);
+                    reject(res.data.msg)
                 }
             },
             fail: (err) => {
@@ -49,5 +81,22 @@ module.exports = {
             method: "POST",
             data
         })
-    }
+    },
+
+    // 封装delete方法
+    delete(url, data) {
+        return request(url, {
+            method: "DELETE", // 修正拼写
+            data
+        });
+    },
+
+    // 封装put方法
+    put(url, data) {
+        return request(url, {
+            method: "PUT", // 修正拼写
+            data
+        });
+    },
+
 }

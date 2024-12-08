@@ -3,12 +3,11 @@ const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia0
 
 App({
     onLaunch() {
-
+        
     },
     globalData: {
-        uid: null,
-        baseUrl: "https://localhost/api/v1/",
-        user: 0,  // 默认是顾客，0表示顾客，1表示骑手
+        baseUrl: "https://www.xiaoqingyanxuan.top/api/v1/wx/",
+        user: 0,  // 默认是顾客，0表示顾客，1表示骑手ffvvc
         userInfo: {
             phoneNumber: null,
             avatarUrl: defaultAvatarUrl,

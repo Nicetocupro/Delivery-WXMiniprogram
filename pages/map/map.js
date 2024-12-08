@@ -56,7 +56,7 @@ Page({
         url: `https://apis.map.qq.com/ws/place/v1/search`,  // 腾讯地图API搜索接口
         data: {
           keyword: query,
-          boundary: `nearby(${this.data.latitude},${this.data.longitude},5000)`,  // 搜索当前位置周围5公里的地点
+          boundary: `nearby(${this.data.latitude},${this.data.longitude},5000,1)`,  // 搜索当前位置周围5公里的地点
           key: 'GUZBZ-FB3RJ-RYWFL-XRVSQ-GVTFV-NVFO4',  // 替换为API密钥
         },
         success: (res) => {

@@ -76,32 +76,46 @@ npm install
 │  └─merge_request_templates
 ├─asserts
 │  └─images
+│      ├─comments
 │      ├─index
+│      ├─mapMark
 │      ├─order
 │      ├─profile
-│      └─register
+│      ├─register
+│      ├─rider_map
+│      ├─shopTest
+│      ├─starbox
+│      └─takeaway
 ├─components
 │  ├─plugins
 │  └─templates
 ├─config
 ├─miniprogram_npm
 │  └─@vant
-│      └─weapp
 ├─node_modules
 │  └─@vant
-│      └─weapp
 ├─pages
 │  ├─addAddress
 │  ├─complaintFeedback
 │  ├─cooperation
 │  ├─index
 │  ├─manageAddress
+│  ├─map
 │  ├─modifyInformation
 │  ├─order
 │  ├─order_info
 │  ├─profile
-│  └─register
+│  ├─register
+│  ├─rider_identify
+│  ├─rider_map
+│  ├─rider_order
+│  ├─rider_profile
+│  ├─shop
+│  ├─shoppingCart
+│  ├─takeaway
+│  └─writeReview
 ├─request
+│  └─module
 └─utils
 ```
 

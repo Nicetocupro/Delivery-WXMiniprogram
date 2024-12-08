@@ -3,36 +3,19 @@
     background-color: #f9f9f9;
 }
 
-/* 顶部导航栏 */
-.navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* 左对齐 */
-    background-color: #ffd600; /* 黄色背景 */
-    padding: 8px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    margin: 10px auto;
+.navigator-icon {
+    width: 30px;
+    height: 30px;
 }
 
-.location {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px; /* 与搜索框之间的间距 */
+.navigator-button {
+    /* border: 1px solid #2cc2c3; */
+    left: 10px;
+    font-weight: 1000;
+    background-color: #e6e6e6;
+    color: #515151;
 }
 
-.location-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 5px;
-}
-
-.location text {
-    font-size: 14px;
-    color: #333;
-    font-weight: bold;
-}
 
 .search-bar {
     display: flex;
@@ -68,7 +51,7 @@
 .category-menu {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #fff;
     padding: 10px;
     border-radius: 10px;
@@ -216,4 +199,14 @@
     color: #e53935;
     margin-top: 2px;
     text-align: center;
+}
+
+/* 搜索框容器样式，使其紧贴顶部 */
+.search-box-container {
+  display: flex;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
