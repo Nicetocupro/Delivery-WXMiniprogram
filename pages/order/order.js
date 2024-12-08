@@ -133,9 +133,9 @@ Component({
         // 查看订单详情
         goto_order: function (e) {
             const index = e.currentTarget.dataset.index;
-            const id = this.data.filteredOrders[index].id;
+            const data = JSON.stringify(this.data.filteredOrders[index]);
             wx.navigateTo({
-                url: `/pages/order_info/order_info?id=${id}`
+                url: `/pages/order_info/order_info?data=${data}`
             });
         },
         // 去写评论页面
@@ -147,7 +147,8 @@ Component({
             if(this.data.filteredOrders[index].status != 4)
             {
                 wx.showToast({
-                  title: '当前订单未完成不可评论',
+                  title: '当前订单未完成',
+                  icon: 'error'
                 });
             }
             else
