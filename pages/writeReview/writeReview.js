@@ -114,7 +114,7 @@ Page({
                     let data = {
                         content: this.data.reviewText,
                         images: uploadedImages,
-                        order_id: this.data.order_id,
+                        order_id: Number(this.data.order_id),
                         rating: this.data.stars_score * 2
                     };
             
