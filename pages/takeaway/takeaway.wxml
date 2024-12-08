@@ -3,17 +3,12 @@
     <button class="navigator-button" size="mini" bindtap="navigator"> 开始导航 </button>
 
     <view class="search-box-container">
-      <input 
-        class="search-box" 
-        placeholder="搜索店铺" 
-        bindinput="onSearchInput"
-        bindconfirm="onSearchConfirm"
-      />
+        <input class="search-box" placeholder="搜索店铺" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
     </view>
 
     <view class="category-menu">
         <!-- 每个分类对应的英文文件名 -->
-        <view class="category-item"  data-category="营养早餐">
+        <view class="category-item" data-category="营养早餐">
             <image class="category-image" src="/asserts/images/takeaway/breakfast.png" />
             <text>营养早餐</text>
         </view>
@@ -41,23 +36,23 @@
     <!-- <text bindtap="output">输出</text> -->
 
     <!-- 商家列表 -->
-    <view class="shop-list" >
+    <view class="shop-list">
         <block wx:for="{{filteredShops}}" wx:key="id">
-            <view class="shop-container">
+            <navigator url="/pages/shop/shop?restaurant_id={{item.id}}" class="shop-container">
                 <view class="shop-item">
                     <view class="shop-info">
-                        <navigator url="/pages/shop/shop?restaurant_id={{item.id}}" class="shop-name">{{item.restaurant_name}}</navigator>
+                        <text class="shop-name">{{item.restaurant_name}}</text>
                         <text class="shop-description">{{item.description}}</text>
                     </view>
                     <text class="shop-rating">{{item.rating}} 分</text>
                 </view>
                 <text class="shop-description" style="white-space: pre-line;">最小配送金额：{{item.minimum_delivery_amount}}元
-                地址：{{item.address}}</text>
+                    地址：{{item.address}}</text>
 
                 <view class="product-list">
                     <block wx:for="{{item.products}}" wx:key="id">
                         <view class="product-item">
-                            <image class="product-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{item.image}}/?session_id={{session_id}}"/>
+                            <image class="product-image" src="https://www.xiaoqingyanxuan.top/api/v1/wx/customer/dish/image/{{item.image}}/?session_id={{session_id}}" />
                             <view class="product-info">
                                 <text class="product-name">{{item.name}}</text>
                                 <text class="product-price">￥{{item.price / 100}}</text>
@@ -65,7 +60,7 @@
                         </view>
                     </block>
                 </view>
-            </view>
+            </navigator>
         </block>
     </view>
 
